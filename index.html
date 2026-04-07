@@ -1050,7 +1050,7 @@
                                     New accounts are set up at the lobby.<br>
                                     Go to <strong style="color:var(--gold);">floggames.com</strong> and select your name to set your PIN.
                                 </div>
-                                <a href="/" style="display:inline-block;padding:10px 24px;border-radius:8px;background:var(--gold);color:var(--navy);font-weight:700;font-size:14px;text-decoration:none;cursor:pointer;">Go to Lobby</a>
+                                <a href="https://floggames.com" style="display:inline-block;padding:10px 24px;border-radius:8px;background:var(--gold);color:var(--navy);font-weight:700;font-size:14px;text-decoration:none;cursor:pointer;">Go to Lobby</a>
                             </template>
                             <template x-if="clubSlug !== 'flog'">
                                 <div style="font-size:12px;color:var(--gray-400);margin-bottom:16px;">Create your account at <span style="color:var(--gold);font-weight:600;" x-text="club?.display_name || 'this club'"></span></div>
@@ -1074,9 +1074,9 @@
         </template>
 
         <div class="main-content">
-            <!-- BACK TO LOBBY -->
-            <div x-show="!showLogin && !viewingHistory" style="padding:10px 16px 0;">
-                <a href="/" style="color:var(--gold);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.5px;">← Return to Lobby</a>
+            <!-- BACK TO LOBBY (FLOG only — other clubs don't have a lobby) -->
+            <div x-show="!showLogin && !viewingHistory && clubSlug === 'flog'" style="padding:10px 16px 0;">
+                <a href="https://floggames.com" style="color:var(--gold);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.5px;">← Return to Lobby</a>
             </div>
 
             <!-- HISTORY SCREEN -->
@@ -2343,7 +2343,7 @@
                 spectatingRound: null, spectatingState: null, spectatingUser: '',
 
                 currentScreen: 'setup', COURSES: COURSES, ELCAB_HOLES: ELCAB_HOLES, ELCAB_PARS: ELCAB_PARS, playerCount: 4,
-                players: [ { name: 'Michael', handicap: 0 }, { name: 'Player A', handicap: 0 }, { name: 'Player B', handicap: 0 }, { name: 'Player C', handicap: 0 } ],
+                players: [ { name: '', handicap: 0 }, { name: '', handicap: 0 }, { name: '', handicap: 0 }, { name: '', handicap: 0 } ],
                 courseName: '', teeName: '', holeData: buildHoleData('', ''), startHole: 1,
                 customPars: [4,4,4,4,4,4,4,4,4, 4,4,4,4,4,4,4,4,4],
                 customHcps: [1,2,3,4,5,6,7,8,9, 10,11,12,13,14,15,16,17,18],
