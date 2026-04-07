@@ -2314,8 +2314,11 @@
 
         /* ── Club Detection from URL ── */
         function getClubSlug() {
+            // Priority: ?club= query param > /scorecard/slug path > /bets/slug path > default 'flog'
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('club')) return params.get('club').toLowerCase();
             const path = window.location.pathname;
-            const match = path.match(/\/bets\/([a-z0-9-]+)/);
+            const match = path.match(/\/(?:scorecard|bets)\/([a-z0-9-]+)/);
             return match ? match[1] : 'flog';
         }
         const CLUB_SLUG = getClubSlug();
