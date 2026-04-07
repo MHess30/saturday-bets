@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Saturday Bets">
-    <meta name="theme-color" content="#1a1a1a">
+    <meta name="theme-color" content="#0A1520">
     <title>Saturday Bets - Golf Betting Tracker</title>
     <!--
     ╔══════════════════════════════════════════════════════════════╗
@@ -81,21 +81,26 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <style>
         :root {
-            --black: #1a1a1a;
-            --black-light: #2d2d2d;
-            --gold: #c8a951;
+            --black: #0A1520;
+            --black-light: #0F1E2D;
+            --gold: #C9A84C;
             --gold-light: #e8d48b;
             --gold-dark: #a08830;
-            --gold-pale: #f5f0e0;
-            --white: #ffffff;
-            --gray-100: #f5f5f5;
-            --gray-200: #e0e0e0;
-            --gray-400: #999999;
-            --gray-700: #555555;
-            --green: #2ecc71;
-            --green-dark: #1a9c54;
-            --red: #e74c3c;
-            --red-light: #fdecea;
+            --gold-pale: #2A2200;
+            --white: #E8ECF0;
+            --gray-100: #162336;
+            --gray-200: #1E3048;
+            --gray-400: #8A9BB0;
+            --gray-700: #6B7D8F;
+            --green: #4CAF50;
+            --green-dark: #1A5C2E;
+            --red: #CC3300;
+            --red-light: #2A0A0A;
+            --dark-bg: #0A1520;
+            --navy: #0D2B45;
+            --navy2: #0A1F32;
+            --card-bg: #0F1E2D;
+            --card-bg2: #162336;
         }
 
         * {
@@ -144,10 +149,10 @@
 
         .setup-section {
             margin-bottom: 20px;
-            background-color: var(--black-light);
+            background-color: var(--card-bg);
             padding: 12px;
             border-radius: 8px;
-            border: 1px solid var(--gold-dark);
+            border: 1px solid #1E3048;
         }
 
         .setup-section-title {
@@ -180,7 +185,7 @@
         .player-input-row input {
             flex: 1;
             background-color: var(--black);
-            border: 1px solid var(--gold-dark);
+            border: 1px solid var(--gray-200);
             color: var(--white);
             padding: 8px;
             border-radius: 4px;
@@ -191,8 +196,9 @@
             color: var(--gray-400);
         }
 
-        .handicap-input {
+        .player-input-row .handicap-input {
             width: 60px;
+            flex: 0 0 60px;
             text-align: center;
         }
 
@@ -218,19 +224,20 @@
         .bet-input-group input {
             width: 80px;
             background-color: var(--black);
-            border: 1px solid var(--gold-dark);
+            border: 1px solid var(--gray-200);
             color: var(--white);
             padding: 6px;
             border-radius: 4px;
             font-size: 14px;
             text-align: center;
+            text-align: center;
         }
 
         .toggle-btn {
             flex: 1;
-            background-color: var(--black);
-            border: 1px solid var(--gold-dark);
-            color: var(--gold-light);
+            background-color: var(--card-bg);
+            border: 1px solid #2D4A60;
+            color: var(--gray-400);
             padding: 10px 12px;
             border-radius: 4px;
             font-size: 13px;
@@ -240,9 +247,9 @@
         }
 
         .toggle-btn.active {
-            background-color: var(--gold);
-            color: var(--black);
-            border-color: var(--gold);
+            background-color: var(--green-dark);
+            color: #FFFFFF;
+            border-color: var(--green);
         }
 
         .toggle-switch {
@@ -295,8 +302,8 @@
         }
 
         .start-button {
-            background-color: var(--gold);
-            color: var(--black);
+            background-color: var(--green-dark);
+            color: #FFFFFF;
             padding: 14px;
             border: none;
             border-radius: 6px;
@@ -319,8 +326,8 @@
         }
 
         .score-entry-header {
-            background-color: var(--black-light);
-            border: 1px solid var(--gold-dark);
+            background-color: var(--card-bg);
+            border: 1px solid var(--gray-200);
             border-radius: 6px;
             padding: 12px;
             margin-bottom: 12px;
@@ -377,8 +384,8 @@
         }
 
         .player-score-card {
-            background-color: var(--black-light);
-            border: 1px solid var(--gold-dark);
+            background-color: var(--card-bg);
+            border: 1px solid var(--gray-200);
             border-radius: 6px;
             padding: 10px;
         }
@@ -414,8 +421,8 @@
         .score-button {
             width: 40px;
             height: 40px;
-            background-color: var(--black);
-            border: 1px solid var(--gold-dark);
+            background-color: var(--card-bg2);
+            border: 1px solid var(--gray-200);
             color: var(--gold);
             font-size: 18px;
             font-weight: 700;
@@ -425,8 +432,8 @@
         }
 
         .score-button:active {
-            background-color: var(--gold-dark);
-            color: var(--black);
+            background-color: var(--green-dark);
+            color: #FFFFFF;
         }
 
         .score-display {
@@ -448,8 +455,8 @@
 
         .nav-button {
             flex: 1;
-            background-color: var(--gold);
-            color: var(--black);
+            background-color: var(--green-dark);
+            color: #FFFFFF;
             padding: 12px;
             border: none;
             border-radius: 4px;
@@ -460,8 +467,8 @@
         }
 
         .nav-button:disabled {
-            background-color: var(--gray-700);
-            color: var(--gray-400);
+            background-color: var(--card-bg2);
+            color: var(--gray-700);
             cursor: not-allowed;
         }
 
@@ -472,8 +479,8 @@
 
         .scorecard-container {
             margin-bottom: 20px;
-            background-color: var(--black-light);
-            border: 1px solid var(--gold-dark);
+            background-color: var(--card-bg);
+            border: 1px solid var(--gray-200);
             border-radius: 6px;
             overflow: hidden;
             overflow-x: auto;
@@ -491,7 +498,7 @@
         .scorecard-table th, .scorecard-table td {
             padding: 8px;
             text-align: center;
-            border: 1px solid var(--gold-dark);
+            border: 1px solid var(--gray-200);
         }
 
         .scorecard-table th {
@@ -504,7 +511,7 @@
         }
 
         .scorecard-table td {
-            background-color: var(--black-light);
+            background-color: var(--card-bg);
             color: var(--white);
         }
 
@@ -527,8 +534,8 @@
 
         /* NASSAU TAB */
         .nassau-matchup {
-            background-color: var(--black-light);
-            border: 1px solid var(--gold-dark);
+            background-color: var(--card-bg);
+            border: 1px solid var(--gray-200);
             border-radius: 6px;
             padding: 12px;
             margin-bottom: 12px;
@@ -546,7 +553,7 @@
             grid-template-columns: 80px 1fr 100px;
             gap: 8px;
             padding: 8px 0;
-            border-bottom: 1px solid var(--gold-dark);
+            border-bottom: 1px solid var(--gray-200);
             align-items: center;
         }
 
@@ -579,8 +586,8 @@
         }
 
         .nassau-status.all-square {
-            background-color: rgba(153, 153, 153, 0.2);
-            color: var(--gray-200);
+            background-color: rgba(138, 155, 176, 0.15);
+            color: var(--gray-400);
         }
 
         .nassau-amount {
@@ -602,7 +609,7 @@
             padding: 8px;
             background-color: var(--black);
             border-radius: 4px;
-            border: 1px dashed var(--gold-dark);
+            border: 1px dashed var(--gray-200);
         }
 
         .press-label {
@@ -625,7 +632,7 @@
             margin-top: 8px;
             padding: 8px;
             background-color: var(--black);
-            border: 1px solid var(--gold-dark);
+            border: 1px solid var(--gray-200);
             border-radius: 4px;
             cursor: pointer;
             text-align: center;
@@ -679,13 +686,13 @@
         }
 
         .hole-detail-cell.tie {
-            color: var(--gray-200);
+            color: var(--gray-400);
         }
 
         /* TEAMS TAB */
         .teams-segment {
-            background-color: var(--black-light);
-            border: 1px solid var(--gold-dark);
+            background-color: var(--card-bg);
+            border: 1px solid var(--gray-200);
             border-radius: 6px;
             padding: 12px;
             margin-bottom: 12px;
@@ -700,7 +707,7 @@
 
         .team-assignment {
             padding: 8px;
-            background-color: var(--black);
+            background-color: var(--card-bg2);
             border-radius: 4px;
             margin-bottom: 10px;
         }
@@ -715,7 +722,7 @@
         .player-button {
             padding: 6px 10px;
             margin: 4px 4px;
-            border: 1px solid var(--gold-dark);
+            border: 1px solid var(--gray-200);
             background-color: var(--black);
             color: var(--gold-light);
             border-radius: 4px;
@@ -726,9 +733,9 @@
         }
 
         .player-button.unassigned {
-            background-color: var(--gray-700);
-            color: var(--gray-200);
-            border-color: var(--gray-400);
+            background-color: var(--card-bg2);
+            color: var(--gray-400);
+            border-color: var(--gray-700);
         }
 
         .player-button.team-a {
@@ -759,8 +766,8 @@
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             margin-bottom: 16px;
-            background-color: var(--black-light);
-            border: 1px solid var(--gold-dark);
+            background-color: var(--card-bg);
+            border: 1px solid var(--gray-200);
             border-radius: 6px;
         }
 
@@ -773,7 +780,7 @@
 
         .points-table th, .points-table td {
             padding: 6px;
-            border: 1px solid var(--gold-dark);
+            border: 1px solid var(--gray-200);
             text-align: center;
         }
 
@@ -787,7 +794,7 @@
         }
 
         .points-table td {
-            background-color: var(--black-light);
+            background-color: var(--card-bg);
             color: var(--white);
         }
 
@@ -818,8 +825,8 @@
         }
 
         .points-summary-item {
-            background-color: var(--black-light);
-            border: 1px solid var(--gold-dark);
+            background-color: var(--card-bg);
+            border: 1px solid var(--gray-200);
             border-radius: 6px;
             padding: 10px;
             text-align: center;
@@ -849,8 +856,8 @@
         .summary-header {
             text-align: center;
             padding: 20px 12px;
-            background-color: var(--black-light);
-            border-bottom: 2px solid var(--gold);
+            background-color: var(--card-bg);
+            border-bottom: 2px solid var(--green-dark);
         }
 
         .summary-total {
@@ -874,8 +881,8 @@
         }
 
         .summary-box {
-            background-color: var(--black-light);
-            border: 1px solid var(--gold-dark);
+            background-color: var(--card-bg);
+            border: 1px solid var(--gray-200);
             border-radius: 6px;
             padding: 12px;
             margin-bottom: 12px;
@@ -895,7 +902,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 8px 0;
-            border-bottom: 1px solid var(--gold-dark);
+            border-bottom: 1px solid var(--gray-200);
             font-size: 13px;
         }
 
@@ -908,18 +915,6 @@
             font-weight: 600;
         }
 
-        .summary-amount {
-            font-weight: 700;
-        }
-
-        .summary-amount.positive {
-            color: var(--green);
-        }
-
-        .summary-amount.negative {
-            color: var(--red);
-        }
-
         /* BOTTOM NAVIGATION */
         .bottom-nav {
             position: fixed;
@@ -927,8 +922,8 @@
             left: 0;
             right: 0;
             height: 60px;
-            background-color: var(--black);
-            border-top: 2px solid var(--gold);
+            background-color: var(--navy2);
+            border-top: 2px solid var(--green-dark);
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -952,7 +947,7 @@
         }
 
         .nav-icon.active {
-            color: var(--gold);
+            color: var(--green);
         }
 
         /* UTILITIES */
@@ -1020,14 +1015,15 @@
         <!-- LOGIN OVERLAY -->
         <template x-if="showLogin">
             <div style="position:fixed;inset:0;background:var(--black);z-index:9999;display:flex;align-items:center;justify-content:center;">
-                <div style="background:var(--black-light);border:1px solid var(--gold-dark);border-radius:16px;padding:32px;width:300px;">
+                <div style="background:var(--card-bg);border:1px solid var(--gray-200);border-radius:16px;padding:32px;width:300px;">
                     <div style="text-align:center;margin-bottom:24px;">
                         <div style="font-size:28px;margin-bottom:4px;">⛳</div>
-                        <div style="font-size:18px;font-weight:700;color:var(--gold);margin-bottom:4px;">Saturday Bets</div>
+                        <div style="font-size:18px;font-weight:700;color:var(--gold);margin-bottom:4px;">Side Action</div>
+                        <div style="font-size:11px;color:var(--gray-400);letter-spacing:1px;">Where Every Round Counts.</div>
                     </div>
 
                     <!-- Mode Tabs -->
-                    <div style="display:flex;gap:0;margin-bottom:20px;border-bottom:1px solid var(--gold-dark);">
+                    <div style="display:flex;gap:0;margin-bottom:20px;border-bottom:1px solid var(--gray-200);">
                         <button @click="loginMode='login'" :style="'flex:1;padding:10px;border:none;background:none;color:' + (loginMode==='login' ? 'var(--gold)' : 'var(--gray-400)') + ';font-weight:' + (loginMode==='login' ? '700' : '400') + ';font-size:13px;cursor:pointer;border-bottom:' + (loginMode==='login' ? '2px solid var(--gold)' : 'none') + ';margin-bottom:-1px;'">Login</button>
                         <button @click="loginMode='register'" :style="'flex:1;padding:10px;border:none;background:none;color:' + (loginMode==='register' ? 'var(--gold)' : 'var(--gray-400)') + ';font-weight:' + (loginMode==='register' ? '700' : '400') + ';font-size:13px;cursor:pointer;border-bottom:' + (loginMode==='register' ? '2px solid var(--gold)' : 'none') + ';margin-bottom:-1px;'">New Account</button>
                     </div>
@@ -1036,12 +1032,12 @@
                     <template x-if="loginMode === 'login'">
                         <div style="text-align:center;">
                             <div style="font-size:12px;color:var(--gray-400);margin-bottom:16px;">Enter your name & PIN</div>
-                            <input type="text" x-model="loginName" placeholder="Your name" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gold-dark);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;">
-                            <input type="tel" x-model="loginPin" placeholder="4-digit PIN" maxlength="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gold-dark);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;" @keyup.enter="doLogin()">
+                            <input type="text" x-model="loginName" placeholder="Your name" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gray-200);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;">
+                            <input type="tel" x-model="loginPin" placeholder="4-digit PIN" maxlength="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gray-200);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;" @keyup.enter="doLogin()">
                             <div x-show="loginError" x-text="loginError" style="color:var(--red);font-size:11px;margin-bottom:8px;"></div>
-                            <button @click="doLogin()" :disabled="loginLoading" style="width:100%;padding:10px;border-radius:8px;background:var(--gold);color:var(--black);font-weight:700;border:none;font-size:14px;cursor:pointer;margin-top:8px;opacity:" + (loginLoading ? '0.6' : '1') + ";" x-text="loginLoading ? 'Logging in...' : 'Login'"></button>
+                            <button @click="doLogin()" :disabled="loginLoading" style="width:100%;padding:10px;border-radius:8px;background:var(--green-dark);color:#FFFFFF;font-weight:700;border:none;font-size:14px;cursor:pointer;margin-top:8px;opacity:" + (loginLoading ? '0.6' : '1') + ";" x-text="loginLoading ? 'Logging in...' : 'Login'"></button>
                             <div style="margin-top:12px;">
-                                <button @click="loginError='Contact the admin (Michael) to reset your PIN.'" style="background:none;border:none;color:var(--gold-dark);text-decoration:underline;font-size:11px;cursor:pointer;">Forgot PIN?</button>
+                                <button @click="loginError='Contact the admin (Michael) to reset your PIN.'" style="background:none;border:none;color:var(--gray-400);text-decoration:underline;font-size:11px;cursor:pointer;">Forgot PIN?</button>
                             </div>
                         </div>
                     </template>
@@ -1050,23 +1046,19 @@
                     <template x-if="loginMode === 'register'">
                         <div style="text-align:center;">
                             <template x-if="clubSlug === 'flog'">
-                                <div>
                                 <div style="font-size:13px;color:var(--gray-400);margin-bottom:16px;line-height:1.6;">
                                     New accounts are set up at the lobby.<br>
                                     Go to <strong style="color:var(--gold);">floggames.com</strong> and select your name to set your PIN.
                                 </div>
                                 <a href="/" style="display:inline-block;padding:10px 24px;border-radius:8px;background:var(--gold);color:var(--navy);font-weight:700;font-size:14px;text-decoration:none;cursor:pointer;">Go to Lobby</a>
-                                </div>
                             </template>
                             <template x-if="clubSlug !== 'flog'">
-                                <div>
                                 <div style="font-size:12px;color:var(--gray-400);margin-bottom:16px;">Create your account at <span style="color:var(--gold);font-weight:600;" x-text="club?.display_name || 'this club'"></span></div>
                                 <input type="text" x-model="loginName" placeholder="Your name" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gray-200);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;">
                                 <input type="tel" x-model="loginPin" placeholder="4-digit PIN" maxlength="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gray-200);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;">
                                 <input type="tel" x-model="confirmPin" placeholder="Confirm PIN" maxlength="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gray-200);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;">
                                 <div x-show="loginError" x-text="loginError" style="color:var(--red);font-size:11px;margin-bottom:8px;"></div>
-                                <button @click="doRegister()" :disabled="loginLoading" style="width:100%;padding:10px;border-radius:8px;background:var(--green-dark);color:#FFFFFF;font-weight:700;border:none;font-size:14px;cursor:pointer;margin-top:8px;" x-text="loginLoading ? 'Creating...' : 'Create Account'"></button>
-                                </div>
+                                <button @click="doRegister()" :disabled="loginLoading" style="width:100%;padding:10px;border-radius:8px;background:var(--green-dark);color:#FFFFFF;font-weight:700;border:none;font-size:14px;cursor:pointer;margin-top:8px;opacity:" + (loginLoading ? '0.6' : '1') + ";" x-text="loginLoading ? 'Creating...' : 'Create Account'"></button>
                             </template>
                         </div>
                     </template>
@@ -1076,23 +1068,28 @@
 
         <!-- HISTORY VIEW BANNER -->
         <template x-if="viewingHistory">
-            <div style="position:fixed;top:0;left:0;right:0;z-index:100;background:var(--gold-dark);color:var(--black);text-align:center;padding:8px;font-weight:700;font-size:13px;">
-                Viewing Past Round <button @click="exitHistoryView()" style="margin-left:12px;padding:4px 12px;border-radius:6px;background:var(--black);color:var(--gold);border:none;font-size:12px;font-weight:600;cursor:pointer;">← Back</button>
+            <div style="position:fixed;top:0;left:0;right:0;z-index:100;background:var(--green-dark);color:#FFFFFF;text-align:center;padding:8px;font-weight:700;font-size:13px;">
+                Viewing Past Round <button @click="exitHistoryView()" style="margin-left:12px;padding:4px 12px;border-radius:6px;background:var(--navy);color:var(--gold);border:none;font-size:12px;font-weight:600;cursor:pointer;">← Back</button>
             </div>
         </template>
 
         <div class="main-content">
+            <!-- BACK TO LOBBY -->
+            <div x-show="!showLogin && !viewingHistory" style="padding:10px 16px 0;">
+                <a href="/" style="color:var(--gold);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.5px;">← Return to Lobby</a>
+            </div>
+
             <!-- HISTORY SCREEN -->
             <template x-if="currentScreen === 'history'">
                 <div class="setup-screen" style="padding-top:16px;">
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
                         <div style="font-size:18px;font-weight:700;color:var(--gold);">Round History</div>
-                        <button @click="currentScreen='setup'" style="padding:6px 14px;border-radius:8px;background:var(--black-light);color:var(--gold);border:1px solid var(--gold-dark);font-size:12px;cursor:pointer;">← Back</button>
+                        <button @click="currentScreen='setup'" style="padding:6px 14px;border-radius:8px;background:var(--card-bg);color:var(--gold);border:1px solid var(--gray-200);font-size:12px;cursor:pointer;">← Back</button>
                     </div>
                     <div x-show="historyLoading" style="text-align:center;color:var(--gray-400);padding:40px 0;">Loading...</div>
                     <div x-show="!historyLoading && roundHistory.length === 0" style="text-align:center;color:var(--gray-400);padding:40px 0;">No past rounds found</div>
                     <template x-for="round in roundHistory" :key="round.id">
-                        <div style="background:var(--black-light);border-radius:12px;padding:14px;margin-bottom:10px;border:1px solid #333;">
+                        <div style="background:var(--black-light);border-radius:12px;padding:14px;margin-bottom:10px;border:1px solid var(--gray-200);">
                             <div style="display:flex;justify-content:space-between;align-items:center;">
                                 <div>
                                     <div style="font-weight:700;color:var(--white);font-size:14px;" x-text="new Date(round.date + 'T12:00:00').toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'})"></div>
@@ -1105,8 +1102,8 @@
                                 </div>
                             </div>
                             <div style="display:flex;gap:8px;margin-top:10px;">
-                                <button @click="loadRoundFromCloud(round.id)" style="flex:1;padding:8px;border-radius:8px;background:var(--gold-dark);color:var(--black);font-weight:600;border:none;font-size:12px;cursor:pointer;" x-text="round.status === 'completed' ? 'View' : 'Resume'"></button>
-                                <button x-show="round.status === 'completed'" @click="editCompletedRound(round.id)" style="padding:8px 12px;border-radius:8px;background:var(--black-light);color:var(--gold);border:1px solid var(--gold-dark);font-size:12px;cursor:pointer;">✏️ Edit</button>
+                                <button @click="loadRoundFromCloud(round.id)" style="flex:1;padding:8px;border-radius:8px;background:var(--green-dark);color:#FFFFFF;font-weight:600;border:none;font-size:12px;cursor:pointer;" x-text="round.status === 'completed' ? 'View' : 'Resume'"></button>
+                                <button x-show="round.status === 'completed'" @click="editCompletedRound(round.id)" style="padding:8px 12px;border-radius:8px;background:var(--card-bg);color:var(--gold);border:1px solid var(--gray-200);font-size:12px;cursor:pointer;">✏️ Edit</button>
                                 <button x-show="isAdmin" @click="deleteRound(round.id)" style="padding:8px 12px;border-radius:8px;background:#441111;color:var(--red);border:none;font-size:12px;cursor:pointer;">Delete</button>
                             </div>
                         </div>
@@ -1120,14 +1117,14 @@
                     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
                         <div style="font-size:18px;font-weight:700;color:var(--green,#2ecc71);">📡 Live Games</div>
                         <div style="display:flex;gap:8px;">
-                            <button @click="loadLiveGames()" style="padding:6px 12px;border-radius:8px;background:var(--black-light);color:var(--gold);border:1px solid var(--gold-dark);font-size:12px;cursor:pointer;">↻ Refresh</button>
-                            <button @click="currentScreen='setup'" style="padding:6px 14px;border-radius:8px;background:var(--black-light);color:var(--gold);border:1px solid var(--gold-dark);font-size:12px;cursor:pointer;">← Back</button>
+                            <button @click="loadLiveGames()" style="padding:6px 12px;border-radius:8px;background:var(--card-bg);color:var(--gold);border:1px solid var(--gray-200);font-size:12px;cursor:pointer;">↻ Refresh</button>
+                            <button @click="currentScreen='setup'" style="padding:6px 14px;border-radius:8px;background:var(--card-bg);color:var(--gold);border:1px solid var(--gray-200);font-size:12px;cursor:pointer;">← Back</button>
                         </div>
                     </div>
                     <div x-show="liveGamesLoading" style="text-align:center;color:var(--gray-400);padding:40px 0;">Loading...</div>
                     <div x-show="!liveGamesLoading && liveGames.length === 0" style="text-align:center;color:var(--gray-400);padding:40px 0;">No active games right now</div>
                     <template x-for="game in liveGames" :key="game.id">
-                        <div style="background:var(--black-light);border-radius:12px;padding:14px;margin-bottom:10px;border:1px solid #333;">
+                        <div style="background:var(--black-light);border-radius:12px;padding:14px;margin-bottom:10px;border:1px solid var(--gray-200);">
                             <div style="display:flex;justify-content:space-between;align-items:center;">
                                 <div>
                                     <div style="font-weight:700;color:var(--gold-light);font-size:15px;" x-text="game.user_name"></div>
@@ -1140,7 +1137,7 @@
                                 </div>
                             </div>
                             <div style="display:flex;gap:8px;margin-top:10px;">
-                                <button @click="spectateRound(game.id, game.user_name)" style="flex:1;padding:8px;border-radius:8px;background:var(--gold-dark);color:var(--black);font-weight:600;border:none;font-size:12px;cursor:pointer;">👁️ View Details</button>
+                                <button @click="spectateRound(game.id, game.user_name)" style="flex:1;padding:8px;border-radius:8px;background:var(--green-dark);color:#FFFFFF;font-weight:600;border:none;font-size:12px;cursor:pointer;">👁️ View Details</button>
                             </div>
                         </div>
                     </template>
@@ -1156,15 +1153,15 @@
                             <div style="font-size:12px;color:var(--gold-light);margin-top:2px;" x-text="spectatingUser + '\\'s Round'"></div>
                         </div>
                         <div style="display:flex;gap:8px;">
-                            <button @click="spectateRound(spectatingRound, spectatingUser)" style="padding:6px 12px;border-radius:8px;background:var(--black-light);color:var(--gold);border:1px solid var(--gold-dark);font-size:12px;cursor:pointer;">↻ Refresh</button>
-                            <button @click="spectatingState=null; currentScreen='liveGames'; loadLiveGames()" style="padding:6px 14px;border-radius:8px;background:var(--black-light);color:var(--gold);border:1px solid var(--gold-dark);font-size:12px;cursor:pointer;">← Back</button>
+                            <button @click="spectateRound(spectatingRound, spectatingUser)" style="padding:6px 12px;border-radius:8px;background:var(--card-bg);color:var(--gold);border:1px solid var(--gray-200);font-size:12px;cursor:pointer;">↻ Refresh</button>
+                            <button @click="spectatingState=null; currentScreen='liveGames'; loadLiveGames()" style="padding:6px 14px;border-radius:8px;background:var(--card-bg);color:var(--gold);border:1px solid var(--gray-200);font-size:12px;cursor:pointer;">← Back</button>
                         </div>
                     </div>
 
                     <template x-if="spectatingState">
                         <div>
                             <!-- Course & Hole Info -->
-                            <div style="background:var(--black-light);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid #333;">
+                            <div style="background:var(--black-light);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid var(--gray-200);">
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
                                     <div>
                                         <div style="font-weight:700;color:var(--white);font-size:14px;" x-text="spectatingState.courseName + ' · ' + spectatingState.teeName"></div>
@@ -1175,7 +1172,7 @@
                             </div>
 
                             <!-- Scorecard -->
-                            <div style="background:var(--black-light);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid #333;overflow-x:auto;">
+                            <div style="background:var(--black-light);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid var(--gray-200);overflow-x:auto;">
                                 <div style="font-weight:700;color:var(--gold);font-size:13px;margin-bottom:10px;">Scorecard</div>
                                 <table style="width:100%;border-collapse:collapse;font-size:11px;white-space:nowrap;">
                                     <thead>
@@ -1194,7 +1191,7 @@
                                     </thead>
                                     <tbody>
                                         <template x-for="(player, pi) in spectatingState.players.slice(0, spectatingState.playerCount)" :key="'sp'+pi">
-                                            <tr style="border-top:1px solid #333;">
+                                            <tr style="border-top:1px solid var(--gray-200);">
                                                 <td style="padding:4px 6px;color:var(--gold-light);font-weight:600;font-size:11px;" x-text="player.name + (pi===0 ? ' ★' : '')"></td>
                                                 <template x-for="h in 9" :key="'ssf'+h">
                                                     <td style="text-align:center;padding:4px 3px;" :style="{color: spectatingState.scores[h-1][pi] === null ? 'var(--gray-400)' : spectatingState.scores[h-1][pi] < spectatingState.holeData[h-1].par ? 'var(--green)' : spectatingState.scores[h-1][pi] === spectatingState.holeData[h-1].par ? 'var(--white)' : spectatingState.scores[h-1][pi] === spectatingState.holeData[h-1].par + 1 ? 'var(--gold-light)' : 'var(--red)'}" x-text="spectatingState.scores[h-1][pi] !== null ? spectatingState.scores[h-1][pi] : '–'"></td>
@@ -1212,20 +1209,20 @@
                             </div>
 
                             <!-- Active Games & Money -->
-                            <div style="background:var(--black-light);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid #333;">
+                            <div style="background:var(--black-light);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid var(--gray-200);">
                                 <div style="font-weight:700;color:var(--gold);font-size:13px;margin-bottom:10px;">Games Active</div>
                                 <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;">
-                                    <span x-show="spectatingState.games?.nassau" style="padding:4px 10px;border-radius:6px;background:var(--gold-dark);color:var(--black);font-weight:600;">Nassau</span>
-                                    <span x-show="spectatingState.games?.team" style="padding:4px 10px;border-radius:6px;background:var(--gold-dark);color:var(--black);font-weight:600;">Team</span>
-                                    <span x-show="spectatingState.games?.points" style="padding:4px 10px;border-radius:6px;background:var(--gold-dark);color:var(--black);font-weight:600;">Points</span>
+                                    <span x-show="spectatingState.games?.nassau" style="padding:4px 10px;border-radius:6px;background:var(--green-dark);color:#FFFFFF;font-weight:600;">Nassau</span>
+                                    <span x-show="spectatingState.games?.team" style="padding:4px 10px;border-radius:6px;background:var(--green-dark);color:#FFFFFF;font-weight:600;">Team</span>
+                                    <span x-show="spectatingState.games?.points" style="padding:4px 10px;border-radius:6px;background:var(--green-dark);color:#FFFFFF;font-weight:600;">Points</span>
                                 </div>
                             </div>
 
                             <!-- Player Positions -->
-                            <div style="background:var(--black-light);border-radius:12px;padding:14px;border:1px solid #333;">
+                            <div style="background:var(--black-light);border-radius:12px;padding:14px;border:1px solid var(--gray-200);">
                                 <div style="font-weight:700;color:var(--gold);font-size:13px;margin-bottom:10px;">Player Positions</div>
                                 <template x-for="(pp, idx) in spectatingState._playerPositions || []" :key="'pp'+idx">
-                                    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 4px;border-bottom:1px solid #333;font-size:13px;">
+                                    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 4px;border-bottom:1px solid var(--gray-200);font-size:13px;">
                                         <span style="color:var(--white);font-weight:500;" x-text="pp.name + (idx===0 ? ' ★' : '')"></span>
                                         <span style="font-weight:700;" :style="{color: pp.amount > 0 ? 'var(--green)' : pp.amount < 0 ? 'var(--red)' : 'var(--gray-400)'}" x-text="(pp.amount > 0 ? '+$' : pp.amount < 0 ? '-$' : '$') + Math.abs(pp.amount)"></span>
                                     </div>
@@ -1249,8 +1246,8 @@
 
                         <div class="player-input-group">
                             <div class="player-input-row" style="margin-bottom: 4px;">
-                                <span style="flex: 1; font-size: 11px; color: var(--gold-light); font-weight: 600;">Name</span>
-                                <span style="width: 60px; text-align: center; font-size: 11px; color: var(--gold-light); font-weight: 600;">HCP</span>
+                                <span style="flex: 1; padding: 8px; border: 1px solid transparent; font-size: 11px; color: var(--gold-light); font-weight: 600;">Name</span>
+                                <span class="handicap-input" style="padding: 8px; border: 1px solid transparent; background: none; font-size: 11px; color: var(--gold-light); font-weight: 600;">HCP</span>
                             </div>
                             <template x-for="(player, idx) in players.slice(0, playerCount)" :key="idx">
                                 <div class="player-input-row">
@@ -1262,7 +1259,7 @@
                                             </template>
                                         </datalist>
                                     </div>
-                                    <input type="number" x-model.number="players[idx].handicap" placeholder="HCP" class="handicap-input" min="0" max="54">
+                                    <input type="number" x-model.number="players[idx].handicap" placeholder="–" class="handicap-input" min="0" max="54">
                                 </div>
                             </template>
                         </div>
@@ -1271,7 +1268,7 @@
                     <div class="setup-section">
                         <div class="setup-section-title">Course</div>
                         <div style="margin-bottom: 8px;">
-                            <select style="width: 100%; padding: 10px 12px; background: var(--dark-card); color: var(--white); border: 1px solid var(--gold-dark); border-radius: 8px; font-size: 14px; appearance: auto; cursor: pointer;" x-model="courseName" @change="setCourse($event.target.value)">
+                            <select style="width: 100%; padding: 10px 12px; background: var(--card-bg); color: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; appearance: auto; cursor: pointer;" x-model="courseName" @change="setCourse($event.target.value)">
                                 <option value="" disabled selected>Select Course</option>
                                 <template x-for="cName in Object.keys(COURSES).sort()" :key="cName">
                                     <option :value="cName" x-text="cName"></option>
@@ -1288,8 +1285,8 @@
                         <template x-if="courseName === 'Custom'">
                             <div style="margin-top: 8px;">
                                 <div style="display: flex; gap: 8px; margin-bottom: 10px; align-items: center;">
-                                    <input type="text" placeholder="Course Name" x-model="customCourseName" style="flex: 1; padding: 8px 12px; background: var(--dark-bg); color: var(--white); border: 1px solid var(--gold-dark); border-radius: 6px; font-size: 13px;">
-                                    <button @click="saveCustomCourse()" style="padding: 8px 16px; background: var(--gold); color: var(--dark-bg); border: none; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap;">Save Course</button>
+                                    <input type="text" placeholder="Course Name" x-model="customCourseName" style="flex: 1; padding: 8px 12px; background: var(--black); color: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; font-size: 13px;">
+                                    <button @click="saveCustomCourse()" style="padding: 8px 16px; background: var(--green-dark); color: #FFFFFF; border: none; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap;">Save Course</button>
                                 </div>
                                 <div style="font-size: 12px; color: var(--gold-light); margin-bottom: 8px;">Enter par and handicap rank for each hole:</div>
                                 <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
@@ -1303,16 +1300,16 @@
                                         <tr>
                                             <td style="padding: 2px 4px; color: var(--gold-light); font-weight: 600;">Par</td>
                                             <template x-for="h in 9" :key="'cp'+h">
-                                                <td style="padding: 2px;"><input type="number" min="3" max="5" style="width: 100%; padding: 4px 2px; background: var(--dark-bg); color: var(--white); border: 1px solid var(--gold-dark); border-radius: 4px; text-align: center; font-size: 12px;" :value="customPars[h-1]" @input="customPars[h-1] = parseInt($event.target.value) || 4; applyCustomCourse()"></td>
+                                                <td style="padding: 2px;"><input type="number" min="3" max="5" style="width: 100%; padding: 4px 2px; background: var(--black); color: var(--white); border: 1px solid var(--gray-200); border-radius: 4px; text-align: center; font-size: 12px;" :value="customPars[h-1]" @input="customPars[h-1] = parseInt($event.target.value) || 4; applyCustomCourse()"></td>
                                             </template>
                                         </tr>
                                         <tr>
                                             <td style="padding: 2px 4px; color: var(--gold-light); font-weight: 600;">HCP</td>
                                             <template x-for="h in 9" :key="'ch'+h">
-                                                <td style="padding: 2px;"><input type="number" min="1" max="18" style="width: 100%; padding: 4px 2px; background: var(--dark-bg); color: var(--white); border: 1px solid var(--gold-dark); border-radius: 4px; text-align: center; font-size: 12px;" :value="customHcps[h-1]" @input="customHcps[h-1] = parseInt($event.target.value) || h; applyCustomCourse()"></td>
+                                                <td style="padding: 2px;"><input type="number" min="1" max="18" style="width: 100%; padding: 4px 2px; background: var(--black); color: var(--white); border: 1px solid var(--gray-200); border-radius: 4px; text-align: center; font-size: 12px;" :value="customHcps[h-1]" @input="customHcps[h-1] = parseInt($event.target.value) || h; applyCustomCourse()"></td>
                                             </template>
                                         </tr>
-                                        <tr style="color: var(--gold-light); border-top: 1px solid var(--gold-dark);">
+                                        <tr style="color: var(--gold-light); border-top: 1px solid var(--gray-200);">
                                             <td style="padding: 4px 4px 2px; font-weight: 700;">Hole</td>
                                             <template x-for="h in 9" :key="'cf2'+h">
                                                 <td style="padding: 4px 2px 2px; text-align: center; font-weight: 700;" x-text="h+9"></td>
@@ -1321,13 +1318,13 @@
                                         <tr>
                                             <td style="padding: 2px 4px; color: var(--gold-light); font-weight: 600;">Par</td>
                                             <template x-for="h in 9" :key="'cp2'+h">
-                                                <td style="padding: 2px;"><input type="number" min="3" max="5" style="width: 100%; padding: 4px 2px; background: var(--dark-bg); color: var(--white); border: 1px solid var(--gold-dark); border-radius: 4px; text-align: center; font-size: 12px;" :value="customPars[h+8]" @input="customPars[h+8] = parseInt($event.target.value) || 4; applyCustomCourse()"></td>
+                                                <td style="padding: 2px;"><input type="number" min="3" max="5" style="width: 100%; padding: 4px 2px; background: var(--black); color: var(--white); border: 1px solid var(--gray-200); border-radius: 4px; text-align: center; font-size: 12px;" :value="customPars[h+8]" @input="customPars[h+8] = parseInt($event.target.value) || 4; applyCustomCourse()"></td>
                                             </template>
                                         </tr>
                                         <tr>
                                             <td style="padding: 2px 4px; color: var(--gold-light); font-weight: 600;">HCP</td>
                                             <template x-for="h in 9" :key="'ch2'+h">
-                                                <td style="padding: 2px;"><input type="number" min="1" max="18" style="width: 100%; padding: 4px 2px; background: var(--dark-bg); color: var(--white); border: 1px solid var(--gold-dark); border-radius: 4px; text-align: center; font-size: 12px;" :value="customHcps[h+8]" @input="customHcps[h+8] = parseInt($event.target.value) || (h+9); applyCustomCourse()"></td>
+                                                <td style="padding: 2px;"><input type="number" min="1" max="18" style="width: 100%; padding: 4px 2px; background: var(--black); color: var(--white); border: 1px solid var(--gray-200); border-radius: 4px; text-align: center; font-size: 12px;" :value="customHcps[h+8]" @input="customHcps[h+8] = parseInt($event.target.value) || (h+9); applyCustomCourse()"></td>
                                             </template>
                                         </tr>
                                     </table>
@@ -1340,16 +1337,32 @@
 
                     <div class="setup-section">
                         <div class="setup-section-title">Game Selection</div>
-                        <div class="game-toggles">
-                            <div class="toggle-item">
-                                <div class="toggle-switch" :class="{ on: games.nassau }" @click="toggleGame('nassau')"></div>
-                                <span style="font-size: 14px;">Indies (Head-to-Head)</span>
-                            </div>
-                            <div class="toggle-item">
-                                <div class="toggle-switch" :class="{ on: games.team }" @click="toggleGame('team')"></div>
-                                <span style="font-size: 14px;">Team Game</span>
-                            </div>
-                            <div class="toggle-item">
+
+                        <div style="margin-bottom: 12px;">
+                            <div style="font-size: 12px; color: var(--gold-light); margin-bottom: 6px; font-weight: 600;">Indies (Head-to-Head)</div>
+                            <select style="width: 100%; padding: 10px 12px; background: var(--card-bg); color: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; appearance: auto; cursor: pointer;" x-model="indieGameType" @change="setIndieGameType($event.target.value)">
+                                <option value="none">None</option>
+                                <option value="straight18">Straight 18</option>
+                                <option value="straight18_auto">18 with Auto Presses</option>
+                                <option value="straight18_aloha">18 with Aloha Bets</option>
+                                <option value="nassau">Nassau</option>
+                                <option value="nassau_auto">Nassau with Auto Presses</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 12px;">
+                            <div style="font-size: 12px; color: var(--gold-light); margin-bottom: 6px; font-weight: 600;">Team Game</div>
+                            <select style="width: 100%; padding: 10px 12px; background: var(--card-bg); color: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; appearance: auto; cursor: pointer;" x-model="teamGameType" @change="setTeamGameType($event.target.value)">
+                                <option value="none">None</option>
+                                <option value="straight6_1ball_auto">Straight Six, 1 Ball, Auto Press</option>
+                                <option value="straight6_2ball_auto">Straight Six, 2 Ball, Auto Press</option>
+                                <option value="nassau_1ball_press">Nassau, 1 Ball, Auto Press</option>
+                                <option value="nassau_2ball_auto">Nassau, 2 Ball, Auto Press</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
                                 <div class="toggle-switch" :class="{ on: games.points }" @click="toggleGame('points')"></div>
                                 <span style="font-size: 14px;">Points Game</span>
                             </div>
@@ -1361,11 +1374,8 @@
                         <template x-if="games.nassau">
                             <div class="bet-amounts">
                                 <div style="font-size: 12px; color: var(--gold-light); margin-bottom: 6px;">Indies Bets (Head-to-Head)</div>
-                                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                    <button class="toggle-btn" :class="{ active: nassauPressMode === 'auto' }" @click="nassauPressMode = 'auto'; saveState()">Auto Presses</button>
-                                    <button class="toggle-btn" :class="{ active: nassauPressMode === 'aloha' }" @click="nassauPressMode = 'aloha'; saveState()">Aloha Only</button>
-                                </div>
-                                <div x-show="nassauPressMode === 'aloha'" style="font-size: 11px; color: var(--gold-light); margin-bottom: 8px;">No auto presses. When closed out on overall 18, aloha press at half the bet through H18.</div>
+                                <div x-show="indieFormat === 'nassau'" style="font-size: 11px; color: var(--gold-light); margin-bottom: 8px;">Front 9, Back 9 &amp; Overall are each separate bets.</div>
+                                <div x-show="nassauPressMode === 'aloha'" style="font-size: 11px; color: var(--gold-light); margin-bottom: 8px;">Aloha mode: no auto presses. When closed out on overall 18, aloha press at half the bet through H18.</div>
                                 <template x-for="pair in allIndiePairs" :key="pair.key">
                                     <div class="bet-input-group">
                                         <span class="bet-label" x-text="`${players[pair.a].name} vs ${players[pair.b].name}`"></span>
@@ -1377,18 +1387,15 @@
 
                         <template x-if="games.team">
                             <div class="bet-amounts">
-                                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                                    <button class="toggle-btn" :class="{ active: teamFormat === 'straight' }" @click="teamFormat = 'straight'; saveState()">Straight</button>
-                                    <button class="toggle-btn" :class="{ active: teamFormat === 'nassau' }" @click="teamFormat = 'nassau'; saveState()">Nassau</button>
-                                </div>
+                                <div style="font-size: 12px; color: var(--gold-light); margin-bottom: 6px;" x-text="teamBalls === 1 ? 'Team Game (Best Ball)' : 'Team Game (Both Balls)'"></div>
                                 <div class="bet-input-group">
-                                    <span class="bet-label">Denomination</span>
+                                    <span class="bet-label">Team $</span>
                                     <input type="number" x-model.number="teamBet" min="1" placeholder="$25" style="flex: 1;">
                                 </div>
                                 <div x-show="teamFormat === 'straight'" style="font-size: 11px; color: var(--gold-light); margin-top: 4px;" x-text="`First bet = $${teamBet * 2} (2x), Presses = $${teamBet}`"></div>
                                 <div x-show="teamFormat === 'nassau'" style="font-size: 11px; color: var(--gold-light); margin-top: 4px;" x-text="`Front 3 = $${teamBet}, Back 3 = $${teamBet}, Overall = $${teamBet * 2} (2x), Presses = $${teamBet}`"></div>
                                 <template x-if="playerCount === 3">
-                                    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--gold-dark);">
+                                    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--gray-200);">
                                         <div style="display: flex; align-items: center; gap: 10px;">
                                             <div class="toggle-switch" :class="{ on: useTeamPro }" @click="toggleTeamPro()"></div>
                                             <span style="font-size: 13px;">Add Pro (scratch 0 HCP)</span>
@@ -1401,8 +1408,9 @@
 
                         <template x-if="games.points">
                             <div class="bet-amounts">
+                                <div style="font-size: 12px; color: var(--gold-light); margin-bottom: 6px;">Points Game</div>
                                 <div class="bet-input-group">
-                                    <span class="bet-label">Denomination</span>
+                                    <span class="bet-label">Points $</span>
                                     <input type="number" x-model.number="pointsBet" min="0.01" step="0.01" placeholder="$2" style="flex: 1;">
                                 </div>
                                 <div style="font-size: 11px; color: var(--gold-light); margin-top: 4px;" x-text="`= $${(pointsBet || 1) * playerCount} per point (${playerCount} players × $${pointsBet || 1})`"></div>
@@ -1419,7 +1427,7 @@
                                     <button class="player-button unassigned" @click="togglePlayerTeam(0, playerIdx)" x-text="players[playerIdx].name"></button>
                                 </template>
                                 <template x-if="teamSegments.length > 0">
-                                    <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--gold-dark); display: flex; gap: 16px;">
+                                    <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--gray-200); display: flex; gap: 16px;">
                                         <div style="flex: 1;">
                                             <div class="team-title">Box</div>
                                             <template x-for="playerIdx in teamSegments[0].box" :key="playerIdx">
@@ -1447,28 +1455,28 @@
                     </div>
 
                     <div style="display:flex;gap:8px;margin-top:12px;">
-                        <button @click="loadHistory(); currentScreen='history'" style="flex:1;padding:10px;border-radius:10px;background:var(--black-light);color:var(--gold);border:1px solid var(--gold-dark);font-size:13px;font-weight:600;cursor:pointer;">📜 Round History</button>
+                        <button @click="loadHistory(); currentScreen='history'" style="flex:1;padding:10px;border-radius:10px;background:var(--card-bg);color:var(--gold);border:1px solid var(--gray-200);font-size:13px;font-weight:600;cursor:pointer;">📜 Round History</button>
                         <template x-if="isAdmin">
-                            <button @click="loadAdminUsers(); showAdminPanel=true" style="flex:1;padding:10px;border-radius:10px;background:var(--black-light);color:var(--gold);border:1px solid var(--gold-dark);font-size:13px;font-weight:600;cursor:pointer;">⚙️ Admin</button>
+                            <button @click="loadAdminUsers(); showAdminPanel=true" style="flex:1;padding:10px;border-radius:10px;background:var(--card-bg);color:var(--gold);border:1px solid var(--gray-200);font-size:13px;font-weight:600;cursor:pointer;">⚙️ Admin</button>
                         </template>
                     </div>
 
                     <!-- Admin Panel -->
                     <template x-if="showAdminPanel">
-                        <div style="margin-top:16px;padding:12px;border:1px solid var(--gold-dark);border-radius:8px;background:var(--black);">
+                        <div style="margin-top:16px;padding:12px;border:1px solid var(--gray-200);border-radius:8px;background:var(--black);">
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
                                 <div style="font-weight:700;color:var(--gold);font-size:13px;">Admin Panel</div>
                                 <button @click="showAdminPanel=false" style="background:none;border:none;color:var(--gray-400);cursor:pointer;font-size:16px;">✕</button>
                             </div>
                             <!-- Live Games Button -->
-                            <button @click="loadLiveGames(); currentScreen='liveGames'; showAdminPanel=false" style="width:100%;padding:10px;border-radius:8px;background:var(--green-dark,#1a9c54);color:var(--white);font-weight:700;border:none;font-size:13px;cursor:pointer;margin-bottom:12px;">📡 Live Games</button>
+                            <button @click="loadLiveGames(); currentScreen='liveGames'; showAdminPanel=false" style="width:100%;padding:10px;border-radius:8px;background:var(--green-dark);color:#FFFFFF;font-weight:700;border:none;font-size:13px;cursor:pointer;margin-bottom:12px;">📡 Live Games</button>
 
                             <div style="font-size:11px;color:var(--gray-400);font-weight:600;text-transform:uppercase;margin-bottom:6px;">Users</div>
                             <div style="max-height:200px;overflow-y:auto;">
                                 <template x-for="user in adminUsers" :key="user.id">
-                                    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;border-bottom:1px solid var(--gold-dark);font-size:12px;color:var(--white);">
+                                    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;border-bottom:1px solid var(--gray-200);font-size:12px;color:var(--white);">
                                         <span><span x-text="user.user_name" style="color:var(--gold-light);font-weight:600;"></span><span x-show="user.is_admin" style="margin-left:4px;color:var(--gold);font-size:10px;font-weight:700;">(ADMIN)</span></span>
-                                        <button @click="resetUserPin(user.id, user.user_name)" style="padding:4px 8px;border-radius:4px;background:var(--black-light);color:var(--gold);border:1px solid var(--gold-dark);font-size:11px;cursor:pointer;">Reset PIN</button>
+                                        <button @click="resetUserPin(user.id, user.user_name)" style="padding:4px 8px;border-radius:4px;background:var(--card-bg);color:var(--gold);border:1px solid var(--gray-200);font-size:11px;cursor:pointer;">Reset PIN</button>
                                     </div>
                                 </template>
                             </div>
@@ -1515,13 +1523,13 @@
                         </template>
 
                         <div class="score-nav">
-                            <button class="nav-button" @click="previousHole()" :disabled="holeIndex === 0">← Back</button>
-                            <button class="nav-button" x-show="holeIndex < 17" @click="nextHole()">Next →</button>
-                            <button class="nav-button" x-show="holeIndex === 17" @click="endRound()" style="background-color: var(--green); color: var(--white); font-weight: 700;">End Round ✓</button>
+                            <button class="nav-button" @click="previousHole()" :disabled="holeIndex === 0" x-text="holeIndex === 0 ? '← Hole 1' : '← Hole ' + holeIndex"></button>
+                            <button class="nav-button" x-show="holeIndex < 17" @click="nextHole()" x-text="'Hole ' + (holeIndex + 2) + ' →'"></button>
+                            <button class="nav-button" x-show="holeIndex === 17" @click="confirmScores()" style="background-color: var(--green); color: var(--white); font-weight: 700;">Confirm Scores ✓</button>
                         </div>
                         <div style="text-align:center;margin-top:12px;display:flex;justify-content:center;gap:16px;">
-                            <button @click="editSetup()" style="background:none;border:none;color:var(--gold-dark);text-decoration:underline;font-size:12px;cursor:pointer;">✏️ Edit Setup</button>
-                            <button @click="resetRound()" style="background:none;border:none;color:var(--gold-dark);text-decoration:underline;font-size:12px;cursor:pointer;">🔄 Reset Round</button>
+                            <button @click="editSetup()" style="background:none;border:none;color:var(--gold);text-decoration:underline;font-size:12px;cursor:pointer;">✏️ Edit Setup</button>
+                            <button @click="resetRound()" style="background:none;border:none;color:var(--gold);text-decoration:underline;font-size:12px;cursor:pointer;">🔄 Reset Round</button>
                         </div>
                     </div>
                 </div>
@@ -1546,7 +1554,7 @@
                                 </div>
                             </div>
                             <template x-if="$data['_expandSummary'+pi]">
-                                <div style="margin-top:8px;border-top:1px solid var(--gold-dark);padding-top:8px;">
+                                <div style="margin-top:8px;border-top:1px solid var(--gray-200);padding-top:8px;">
                                     <!-- Indies breakdown -->
                                     <template x-if="games.nassau">
                                         <div style="margin-bottom:8px;">
@@ -1567,9 +1575,18 @@
                                     </template>
                                     <!-- Team breakdown -->
                                     <template x-if="games.team">
-                                        <div class="summary-item" style="margin-bottom:4px;">
-                                            <span class="summary-player-name" style="font-size:12px;">Team Game</span>
-                                            <span class="summary-amount" style="font-size:12px;" :class="{ positive: getPlayerTeamTotal(pi) > 0, negative: getPlayerTeamTotal(pi) < 0 }" x-text="formatMoney(getPlayerTeamTotal(pi))"></span>
+                                        <div style="margin-bottom:8px;">
+                                            <div style="font-size:11px;color:var(--gold-light);margin-bottom:4px;">Team Game</div>
+                                            <template x-for="(seg, sIdx) in teamSegments" :key="'ts'+pi+'-'+sIdx">
+                                                <div class="summary-item" style="padding:2px 0;">
+                                                    <span class="summary-player-name" style="font-size:12px;" x-text="getTeamSegmentLabel(sIdx)"></span>
+                                                    <span class="summary-amount" style="font-size:12px;" :class="{ positive: getPlayerTeamSegment(pi, sIdx) > 0, negative: getPlayerTeamSegment(pi, sIdx) < 0 }" x-text="formatMoney(getPlayerTeamSegment(pi, sIdx))"></span>
+                                                </div>
+                                            </template>
+                                            <div class="summary-item" style="padding:2px 0;border-top:1px solid var(--gray-700);">
+                                                <span class="summary-player-name" style="font-size:12px;font-weight:700;">Team Total</span>
+                                                <span class="summary-amount" style="font-size:12px;font-weight:700;" :class="{ positive: getPlayerTeamTotal(pi) > 0, negative: getPlayerTeamTotal(pi) < 0 }" x-text="formatMoney(getPlayerTeamTotal(pi))"></span>
+                                            </div>
                                         </div>
                                     </template>
                                     <!-- Points breakdown -->
@@ -1585,15 +1602,15 @@
                     </template>
 
                     <div x-show="!viewingHistory" style="display:flex;flex-direction:column;gap:8px;">
-                        <button class="start-button" @click="saveToCloud('completed')" x-show="!cloudSaving" style="background-color: var(--gold-dark); color: var(--black);">☁️ Save to Cloud</button>
+                        <button class="start-button" @click="saveToCloud('completed')" x-show="!cloudSaving" style="background-color: var(--green-dark); color: #FFFFFF;">☁️ Save to Cloud</button>
                         <div x-show="cloudSaving" style="text-align:center;padding:10px;color:var(--gold-dark);font-size:13px;">Saving...</div>
                         <button class="start-button" @click="editSetup()" style="background-color: var(--green); color: var(--white);">✏️ Edit Setup</button>
-                        <button class="start-button" @click="resetRound()" style="background-color: var(--gold); color: var(--black);">🔄 Reset Round</button>
-                        <button class="start-button" @click="newRound()" style="background-color: var(--gray-700); color: var(--white);">New Round</button>
+                        <button class="start-button" @click="resetRound()" style="background-color: var(--card-bg2); color: var(--gold); border: 1px solid var(--gray-200);">🔄 Reset Round</button>
+                        <button class="start-button" @click="newRound()" style="background-color: var(--card-bg2); color: var(--gray-400); border: 1px solid var(--gray-200);">New Round</button>
                     </div>
                     <div x-show="viewingHistory" style="display:flex;flex-direction:column;gap:8px;text-align:center;">
-                        <button class="start-button" @click="editCompletedRound(cloudRoundId || spectatingRound)" x-show="cloudRoundId || spectatingRound" style="background-color: var(--gold); color: var(--black);">✏️ Edit This Round</button>
-                        <button class="start-button" @click="exitHistoryView()" style="background-color: var(--gold-dark); color: var(--black);">← Back to History</button>
+                        <button class="start-button" @click="editCompletedRound(cloudRoundId || spectatingRound)" x-show="cloudRoundId || spectatingRound" style="background-color: var(--green-dark); color: #FFFFFF;">✏️ Edit This Round</button>
+                        <button class="start-button" @click="exitHistoryView()" style="background-color: var(--card-bg2); color: var(--gold); border: 1px solid var(--gray-200);">← Back to History</button>
                     </div>
                 </div>
             </template>
@@ -1609,12 +1626,12 @@
                                     <template x-for="h in 9" :key="h">
                                         <th x-text="`${h}`"></th>
                                     </template>
-                                    <th style="background-color: var(--gold-dark);">OUT</th>
+                                    <th style="background-color: var(--green-dark);">OUT</th>
                                     <template x-for="h in 9" :key="h + 9">
                                         <th x-text="`${h + 9}`"></th>
                                     </template>
-                                    <th style="background-color: var(--gold-dark);">IN</th>
-                                    <th style="background-color: var(--gold-dark); font-weight: 800;">TOTAL</th>
+                                    <th style="background-color: var(--green-dark);">IN</th>
+                                    <th style="background-color: var(--green-dark); font-weight: 800;">TOTAL</th>
                                 </tr>
                                 <tr>
                                     <th>Par</th>
@@ -1661,12 +1678,12 @@
                                     <template x-for="h in 9" :key="h">
                                         <th x-text="`${h}`"></th>
                                     </template>
-                                    <th style="background-color: var(--gold-dark);">OUT</th>
+                                    <th style="background-color: var(--green-dark);">OUT</th>
                                     <template x-for="h in 9" :key="h + 9">
                                         <th x-text="`${h + 9}`"></th>
                                     </template>
-                                    <th style="background-color: var(--gold-dark);">IN</th>
-                                    <th style="background-color: var(--gold-dark); font-weight: 800;">TOTAL</th>
+                                    <th style="background-color: var(--green-dark);">IN</th>
+                                    <th style="background-color: var(--green-dark); font-weight: 800;">TOTAL</th>
                                 </tr>
                                 <tr>
                                     <th>Par</th>
@@ -1702,7 +1719,7 @@
 
                     <template x-for="(matchup, mIdx) in nassauMatchups" :key="'nm'+mIdx">
                         <div class="scorecard-container" style="margin-bottom: 16px;">
-                            <div style="padding: 8px 12px; background-color: var(--black); border-bottom: 1px solid var(--gold-dark); font-size: 13px; font-weight: 700; color: var(--gold);" x-text="`${players[matchup.playerA].name} vs ${players[matchup.playerB].name} ($${matchup.bet || getPairBet(matchup.playerA, matchup.playerB)})`"></div>
+                            <div style="padding: 8px 12px; background-color: var(--black); border-bottom: 1px solid var(--gray-200); font-size: 13px; font-weight: 700; color: var(--gold);" x-text="`${players[matchup.playerA].name} vs ${players[matchup.playerB].name} ($${matchup.bet || getPairBet(matchup.playerA, matchup.playerB)})`"></div>
                             <table class="scorecard-table">
                                 <thead>
                                     <tr>
@@ -1710,12 +1727,12 @@
                                         <template x-for="h in 9" :key="'nh'+h">
                                             <th x-text="h"></th>
                                         </template>
-                                        <th style="background-color: var(--gold-dark);">OUT</th>
+                                        <th style="background-color: var(--green-dark);">OUT</th>
                                         <template x-for="h in 9" :key="'nh2'+h">
                                             <th x-text="h + 9"></th>
                                         </template>
-                                        <th style="background-color: var(--gold-dark);">IN</th>
-                                        <th style="background-color: var(--gold-dark); font-weight: 800;">OVERALL</th>
+                                        <th style="background-color: var(--green-dark);">IN</th>
+                                        <th style="background-color: var(--green-dark); font-weight: 800;">OVERALL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1771,7 +1788,7 @@
                                             <button class="player-button unassigned" @click="togglePlayerTeam(sIdx, playerIdx)" x-text="players[playerIdx].name"></button>
                                         </template>
                                         <template x-if="true">
-                                            <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--gold-dark); display: flex; gap: 16px;">
+                                            <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--gray-200); display: flex; gap: 16px;">
                                                 <div style="flex: 1;">
                                                     <div class="team-title">Box</div>
                                                     <template x-for="playerIdx in segment.box" :key="playerIdx">
@@ -1796,7 +1813,7 @@
                                 <div>
                                     <!-- Mini scorecard for segment (shows redistributed team strokes) -->
                                     <div class="scorecard-container" style="margin-bottom: 8px;">
-                                        <div style="padding: 6px 12px; background-color: var(--black); border-bottom: 1px solid var(--gold-dark); font-size: 12px; font-weight: 700; color: var(--gold);" x-text="`Holes ${segment.startHole}-${segment.endHole} Scorecard`"></div>
+                                        <div style="padding: 6px 12px; background-color: var(--black); border-bottom: 1px solid var(--gray-200); font-size: 12px; font-weight: 700; color: var(--gold);" x-text="`Holes ${segment.startHole}-${segment.endHole} Scorecard`"></div>
                                         <table class="scorecard-table">
                                             <thead>
                                                 <tr>
@@ -1804,7 +1821,7 @@
                                                     <template x-for="h in 6" :key="'msh'+sIdx+h">
                                                         <th x-text="segment.startHole + h - 1"></th>
                                                     </template>
-                                                    <th style="background-color: var(--gold-dark);">TOT</th>
+                                                    <th style="background-color: var(--green-dark);">TOT</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -1832,7 +1849,7 @@
                                     <!-- Match results -->
                                 <template x-for="(match, mIdx) in (segment.matches || [])" :key="'tm'+mIdx">
                                     <div class="scorecard-container" style="margin-bottom: 16px;">
-                                        <div style="padding: 8px 12px; background-color: var(--black); border-bottom: 1px solid var(--gold-dark); font-size: 13px; font-weight: 700; color: var(--gold);" x-text="`${match.label} ($${teamBet * 2})`"></div>
+                                        <div style="padding: 8px 12px; background-color: var(--black); border-bottom: 1px solid var(--gray-200); font-size: 13px; font-weight: 700; color: var(--gold);" x-text="`${match.label} ($${teamBet * 2})`"></div>
                                         <!-- Straight format: 6-hole table -->
                                         <template x-if="teamFormat === 'straight'">
                                         <table class="scorecard-table">
@@ -1842,7 +1859,7 @@
                                                     <template x-for="h in 6" :key="'th'+h">
                                                         <th x-text="segment.startHole + h - 1"></th>
                                                     </template>
-                                                    <th style="background-color: var(--gold-dark); font-weight: 800;">$</th>
+                                                    <th style="background-color: var(--green-dark); font-weight: 800;">$</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -1875,7 +1892,7 @@
                                                     <template x-for="h in 6" :key="'tmh'+h">
                                                         <th x-text="segment.startHole + h - 1"></th>
                                                     </template>
-                                                    <th style="background-color: var(--gold-dark); font-weight: 800;">$</th>
+                                                    <th style="background-color: var(--green-dark); font-weight: 800;">$</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -1936,12 +1953,12 @@
                                     <template x-for="h in 9" :key="h">
                                         <th x-text="`${h}`"></th>
                                     </template>
-                                    <th style="background-color: var(--gold-dark);">OUT</th>
+                                    <th style="background-color: var(--green-dark);">OUT</th>
                                     <template x-for="h in 9" :key="h + 9">
                                         <th x-text="`${h + 9}`"></th>
                                     </template>
-                                    <th style="background-color: var(--gold-dark);">IN</th>
-                                    <th style="background-color: var(--gold-dark); font-weight: 800;">TOTAL</th>
+                                    <th style="background-color: var(--green-dark);">IN</th>
+                                    <th style="background-color: var(--green-dark); font-weight: 800;">TOTAL</th>
                                 </tr>
                                 <tr>
                                     <th>Par</th>
@@ -1983,12 +2000,12 @@
                                     <template x-for="h in 9" :key="'ph'+h">
                                         <th x-text="h"></th>
                                     </template>
-                                    <th style="background-color: var(--gold-dark);">OUT</th>
+                                    <th style="background-color: var(--green-dark);">OUT</th>
                                     <template x-for="h in 9" :key="'ph2'+h">
                                         <th x-text="h + 9"></th>
                                     </template>
-                                    <th style="background-color: var(--gold-dark);">IN</th>
-                                    <th style="background-color: var(--gold-dark); font-weight: 800;">TOTAL</th>
+                                    <th style="background-color: var(--green-dark);">IN</th>
+                                    <th style="background-color: var(--green-dark); font-weight: 800;">TOTAL</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -2232,7 +2249,8 @@
                     'Chairmans': { label: "Chairman's", rating: '73.0/136', total: 6677, yards: [435,485,182,530,351,194,366,398,415, 395,317,494,182,383,440,531,198,381], hcp: [3,13,17,7,9,11,15,1,5, 8,16,12,18,6,2,10,14,4] },
                     'White': { label: 'White', rating: '70.9/131', total: 6216, yards: [417,450,163,501,333,168,341,374,375, 362,297,469,144,383,425,496,182,336], hcp: [3,13,17,7,9,11,15,1,5, 8,16,12,18,6,2,10,14,4] },
                     'Gold': { label: 'Gold', rating: '67.5/123', total: 5459, yards: [338,415,130,413,313,138,341,339,337, 317,275,401,136,335,339,414,147,331], hcp: [3,13,17,7,9,11,15,1,5, 8,16,12,18,6,2,10,14,4] }
-                },
+                }
+            },
             'Bel-Air CC': {
                 pars: [4,5,4,4,3,3,4,5,4, 3,4,4,3,5,4,3,4,4],
                 defaultTee: 'Gold',
@@ -2241,6 +2259,31 @@
                     'Blue': { label: 'Blue', rating: '72.6/135', total: 6523, yards: [354,494,354,393,165,189,393,514,443, 194,380,376,221,559,451,189,454,401], hcp: [9,7,13,3,17,15,5,11,1, 16,8,14,12,2,4,18,6,10] },
                     'White': { label: 'White', rating: '71.2/131', total: 6240, yards: [339,473,339,376,158,181,376,492,424, 185,364,360,212,535,431,181,434,384], hcp: [9,7,13,3,17,15,5,11,1, 16,8,14,12,2,4,18,6,10] },
                     'Red': { label: 'Red', rating: '68.8/126', total: 5793, yards: [314,439,314,349,146,168,349,456,393, 172,337,334,196,497,400,168,403,356], hcp: [9,7,13,3,17,15,5,11,1, 16,8,14,12,2,4,18,6,10] }
+                }
+            },
+            'Lakeside GC': {
+                pars: [4,4,3,5,4,4,4,3,5, 4,4,4,3,4,4,4,3,4],
+                defaultTee: 'Championship',
+                tees: {
+                    'Championship': { label: 'Championship', rating: '71.9/127', total: 6539, yards: [385,410,175,530,400,380,420,195,505, 390,365,410,180,405,370,395,165,360], hcp: [7,3,15,1,9,11,5,17,13, 8,10,4,16,2,12,6,18,14] },
+                    'Regular': { label: 'Regular', rating: '70.6/123', total: 6272, yards: [370,390,160,510,385,365,400,180,485, 375,350,390,170,385,355,380,155,345], hcp: [7,3,15,1,9,11,5,17,13, 8,10,4,16,2,12,6,18,14] }
+                }
+            },
+            'Pinehurst No. 2': {
+                pars: [4,4,4,4,5,3,4,5,3, 5,4,4,4,4,3,5,3,4],
+                defaultTee: 'Blue/White',
+                tees: {
+                    'Blue/White': { label: 'Blue/White Hybrid', rating: '73.6/141', total: 6659, yards: [391,411,353,423,511,177,404,469,151, 586,375,364,372,432,171,514,187,368], hcp: [11,3,9,1,15,5,7,17,13, 18,8,10,6,2,12,16,14,4] },
+                    'White': { label: 'White', rating: '72.0/139', total: 6324, yards: [375,411,331,423,471,177,393,439,151, 459,375,364,355,416,171,483,162,368], hcp: [11,3,9,1,15,5,7,17,13, 18,8,10,6,2,12,16,14,4] }
+                }
+            },
+            'Pinehurst No. 10': {
+                pars: [4,3,5,4,4,4,3,4,4, 5,3,5,4,3,4,4,3,4],
+                defaultTee: 'Blue',
+                tees: {
+                    'Blue': { label: 'Blue', rating: '74.1/142', total: 7020, yards: [447,182,555,342,400,489,150,385,468, 634,182,544,508,264,385,477,175,433], hcp: [5,13,11,15,9,1,17,7,3, 6,14,16,2,10,12,4,18,8] },
+                    'Blue/White': { label: 'Blue/White Hybrid', rating: '72.7/139', total: 6709, yards: [400,182,532,342,400,437,150,385,439, 585,170,544,483,224,385,443,175,433], hcp: [5,13,11,15,9,1,17,7,3, 6,14,16,2,10,12,4,18,8] },
+                    'White': { label: 'White', rating: '71.5/137', total: 6439, yards: [400,163,532,308,374,437,122,357,439, 585,170,494,483,224,361,443,142,405], hcp: [5,13,11,15,9,1,17,7,3, 6,14,16,2,10,12,4,18,8] }
                 }
             }
         };
@@ -2297,13 +2340,15 @@
                 spectatingRound: null, spectatingState: null, spectatingUser: '',
 
                 currentScreen: 'setup', COURSES: COURSES, ELCAB_HOLES: ELCAB_HOLES, ELCAB_PARS: ELCAB_PARS, playerCount: 4,
-                players: [ { name: 'Michael', handicap: 0 }, { name: 'Player A', handicap: 5 }, { name: 'Player B', handicap: 10 }, { name: 'Player C', handicap: 15 } ],
+                players: [ { name: 'Michael', handicap: 0 }, { name: 'Player A', handicap: 0 }, { name: 'Player B', handicap: 0 }, { name: 'Player C', handicap: 0 } ],
                 courseName: '', teeName: '', holeData: buildHoleData('', ''), startHole: 1,
                 customPars: [4,4,4,4,4,4,4,4,4, 4,4,4,4,4,4,4,4,4],
                 customHcps: [1,2,3,4,5,6,7,8,9, 10,11,12,13,14,15,16,17,18],
                 customCourseName: '',
                 games: { nassau: true, team: false, points: false },
-                nassauBets: {}, nassauPressMode: 'auto', teamBet: 25, teamFormat: 'straight', pointsBet: 2, useTeamPro: false,
+                indieGameType: 'straight18_auto', // 'none','straight18','straight18_auto','straight18_aloha','nassau','nassau_auto'
+                teamGameType: 'none', // 'none','straight6_1ball_auto','straight6_2ball_auto','nassau_1ball_press','nassau_2ball_auto'
+                nassauBets: {}, nassauPressMode: 'auto', indieFormat: 'straight', teamBet: 25, teamFormat: 'straight', teamBalls: 2, pointsBet: 2, useTeamPro: false,
                 scores: Array(18).fill(null).map(() => Array(5).fill(null)), holeIndex: 0, roundStarted: false,
                 nassauMatchups: [], nassauStrokes: [], teamSegments: [], teamStrokes: [],
                 _expandSummary0: false, _expandSummary1: false, _expandSummary2: false, _expandSummary3: false, _expandSummary4: false,
@@ -2324,6 +2369,7 @@
                 get pointsTotal() { return this.pointsMoneyTotals[0] || 0; },
                 get currentPosition() { return this.getPlayerTotal(0); },
 
+                /* ── Club Loading ── */
                 async loadClub() {
                     if (!sb) return;
                     try {
@@ -2331,6 +2377,7 @@
                         if (data) {
                             this.club = data;
                             document.title = data.display_name + ' - Golf Scorecard';
+                            // Apply branding colors
                             if (data.primary_color) {
                                 document.documentElement.style.setProperty('--gold', data.primary_color);
                                 document.documentElement.style.setProperty('--gold-dark', data.primary_color);
@@ -2366,22 +2413,41 @@
                 },
 
                 init() {
+                    // Load club config first (sets branding, title)
                     this.loadClub().then(() => {
                         this.loadRoster();
                     });
+
                     // Restore login from localStorage with DB verification
                     const savedUser = localStorage.getItem('sbUser');
                     const savedPin = localStorage.getItem('sbPin');
                     if (savedUser && savedPin) {
                         this.verifyLogin(savedUser, savedPin);
                     } else {
-                        this.showLogin = true;
+                        // Check if coming from lobby — auto-login with lobby credentials
+                        const lobbyName = sessionStorage.getItem('flog_player_name');
+                        const lobbyPin = sessionStorage.getItem('flog_pin');
+                        if (lobbyName && lobbyPin) {
+                            this.loginName = lobbyName.toLowerCase();
+                            this.loginPin = lobbyPin;
+                            this.showLogin = true;
+                            // Auto-login after Alpine initializes
+                            this.$nextTick(() => { this.doLogin(); });
+                        } else {
+                            if (lobbyName) this.loginName = lobbyName.toLowerCase();
+                            this.showLogin = true;
+                        }
                     }
                     const savedCloudId = localStorage.getItem('sbCloudRoundId');
                     if (savedCloudId) this.cloudRoundId = savedCloudId;
 
                     this.loadCustomCourses().then(() => {
                         this.loadState();
+                        // Sync game flags from dropdown values (fixes stale saved state)
+                        if (this.indieGameType && this.indieGameType !== 'none') this.games.nassau = true;
+                        if (this.indieGameType === 'none') this.games.nassau = false;
+                        if (this.teamGameType && this.teamGameType !== 'none') this.games.team = true;
+                        if (this.teamGameType === 'none') this.games.team = false;
                         { const c = COURSES[this.courseName]; if(c && c.tees[this.teeName]) this.holeData = buildHoleData(this.teeName, this.courseName); }
                         if (!this.roundStarted) { this.currentScreen = 'setup'; }
                         else { this.recalcStrokes(); this.updateAllGameLogic(); }
@@ -2398,7 +2464,7 @@
                 newRound() { if (confirm('Start a new round?')) { localStorage.removeItem('saturdayBetsState'); localStorage.removeItem('sbCloudRoundId'); this.cloudRoundId = null; location.reload(); } },
                 resetRound() {
                     if (!confirm('🔄 Reset this round?\n\nThis will:\n• Clear all scores\n• Go back to Setup screen\n• Keep your players, games, and bet amounts\n\nYou can change formats (e.g. switch to Nassau) before restarting.')) return;
-                    this.scores = Array(18).fill(null).map(() => Array(this.playerCount).fill(null));
+                    this.scores = Array(18).fill(null).map(() => Array(Math.max(this.playerCount + (this.useTeamPro ? 1 : 0), 5)).fill(null));
                     this.holeIndex = 0;
                     this.roundStarted = false;
                     this.nassauMatchups = []; this.nassauStrokes = [];
@@ -2420,7 +2486,7 @@
                 setCourse(cName) { this.courseName = cName; const course = COURSES[cName]; if(course) { const defaultTee = course.defaultTee; this.teeName = defaultTee; this.holeData = buildHoleData(defaultTee, cName); } else if(cName === 'Custom') { this.teeName = 'Custom'; this.applyCustomCourse(); } else { this.teeName = ''; } this.saveState(); },
                 applyCustomCourse() {
                     this.holeData = this.customPars.map((par, i) => ({
-                        hole: i + 1, par: par, hcp: this.customHcps[i], yards: 0
+                        hole: i + 1, par: par || 4, hcp: this.customHcps[i] || (i + 1), yards: 0
                     }));
                 },
                 async saveCustomCourse() {
@@ -2464,6 +2530,39 @@
                 setPlayerCount(count) { this.playerCount = count; if(count !== 3) { this.useTeamPro = false; this.players = this.players.filter(p => !p.isPro); } if(count===3) { this.players = this.players.filter(p => !p.isPro).slice(0, 3); this.scores = this.scores.map(r => r.slice(0, 3)); } else if(count===4) { while(this.players.length < 4) this.players.push({name:'Player '+ String.fromCharCode(64+this.players.length), handicap:10}); this.players = this.players.slice(0, 4); this.scores = this.scores.map(r => { while(r.length < 4) r.push(null); return r.slice(0, 4); }); } else if(count===5) { while(this.players.length < 5) this.players.push({name:'Player '+ String.fromCharCode(64+this.players.length), handicap:20}); this.players = this.players.slice(0, 5); this.scores = this.scores.map(r => { while(r.length < 5) r.push(null); return r.slice(0, 5); }); } this.saveState(); },
                 toggleGame(game) { this.games[game] = !this.games[game]; if(game === 'team' && !this.games.team) { this.useTeamPro = false; } if(game === 'team' && this.games.team && this.teamSegments.length === 0) { const tpc = this.teamPlayerCount; for(let s=0; s<3; s++) { const sh = s*6+1; const eh = (s+1)*6; this.teamSegments.push({segment:s, startHole:sh, endHole:eh, box:[], opponents:[], unassigned:Array.from({length:tpc},(_, i)=>i), matches:[], format:this.teamFormat}); } } this.saveState(); },
                 toggleTeamPro() { this.useTeamPro = !this.useTeamPro; if(this.useTeamPro) { if(this.players.length < this.playerCount + 1) this.players.push({name:'Pro', handicap:0, isPro:true}); else { this.players[this.playerCount] = {name:'Pro', handicap:0, isPro:true}; } } else { this.players = this.players.filter(p => !p.isPro); } this.teamSegments = []; const tpc = this.teamPlayerCount; for(let s=0; s<3; s++) { const sh = s*6+1; const eh = (s+1)*6; this.teamSegments.push({segment:s, startHole:sh, endHole:eh, box:[], opponents:[], unassigned:Array.from({length:tpc},(_, i)=>i), matches:[], format:this.teamFormat}); } this.saveState(); },
+                setIndieGameType(val) {
+                    this.indieGameType = val;
+                    if (val === 'none') { this.games.nassau = false; }
+                    else {
+                        this.games.nassau = true;
+                        if (val === 'straight18') { this.indieFormat = 'straight'; this.nassauPressMode = 'none'; }
+                        else if (val === 'straight18_auto') { this.indieFormat = 'straight'; this.nassauPressMode = 'auto'; }
+                        else if (val === 'straight18_aloha') { this.indieFormat = 'straight'; this.nassauPressMode = 'aloha'; }
+                        else if (val === 'nassau') { this.indieFormat = 'nassau'; this.nassauPressMode = 'none'; }
+                        else if (val === 'nassau_auto') { this.indieFormat = 'nassau'; this.nassauPressMode = 'auto'; }
+                    }
+                    this.saveState();
+                },
+                setTeamGameType(val) {
+                    this.teamGameType = val;
+                    if (val === 'none') { this.games.team = false; this.useTeamPro = false; }
+                    else {
+                        this.games.team = true;
+                        if (val === 'straight6_1ball_auto') { this.teamFormat = 'straight'; this.teamBalls = 1; }
+                        else if (val === 'straight6_2ball_auto') { this.teamFormat = 'straight'; this.teamBalls = 2; }
+                        else if (val === 'nassau_1ball_press') { this.teamFormat = 'nassau'; this.teamBalls = 1; }
+                        else if (val === 'nassau_2ball_auto') { this.teamFormat = 'nassau'; this.teamBalls = 2; }
+                        // Initialize team segments if needed
+                        if (this.teamSegments.length === 0) {
+                            const tpc = this.teamPlayerCount;
+                            for (let s = 0; s < 3; s++) {
+                                const sh = s * 6 + 1; const eh = (s + 1) * 6;
+                                this.teamSegments.push({segment:s, startHole:sh, endHole:eh, box:[], opponents:[], unassigned:Array.from({length:tpc},(_, i)=>i), matches:[], format:this.teamFormat});
+                            }
+                        }
+                    }
+                    this.saveState();
+                },
                 getUnassignedTeamPlayers(s) { return !this.teamSegments[s] ? [] : this.teamSegments[s].unassigned; },
                 startRound() { for(let i=0; i<this.playerCount; i++) { const p=this.players[i]; if(!p.name || p.name.trim() === '') { alert('All players must have names'); return; } } if(this.games.team && this.teamSegments.length > 0) { const s = this.teamSegments[0]; if(s.box.length === 0 || s.opponents.length === 0) { alert('Please assign all players to teams'); return; } } this.roundStarted = true; this.holeIndex = this.startHole - 1; const scoreCols = this.useTeamPro ? this.playerCount + 1 : this.playerCount; this.scores = Array(18).fill(null).map(() => Array(scoreCols).fill(null)); if(this.useTeamPro) { const proIdx = this.playerCount; for(let h=0; h<18; h++) this.scores[h][proIdx] = this.holeData[h].par; } if(this.games.nassau) this.initializeNassau(); if(this.games.team) this.initializeTeamGame(); if(this.games.points) this.initializePointsGame(); this.currentScreen = 'scoreEntry'; this.saveState(); },
 
@@ -2472,7 +2571,7 @@
                 initializePointsGame() { this.pointsTotals = Array(this.playerCount).fill(0); this.pointsMoneyTotals = Array(this.playerCount).fill(0); const ah = this.players.slice(0, this.playerCount).map(p=>p.handicap); const mh = Math.min(...ah); this.pointsStrokes = ah.map(h=>({count:h-mh, indices:Array(18).fill(0)})); for(let pi=0; pi<this.playerCount; pi++) { const sc = this.pointsStrokes[pi].count; const sh = this.holeData.map((h,x)=>({...h,x})).sort((a,b)=>a.hcp-b.hcp); for(let j=0; j<sc; j++) this.pointsStrokes[pi].indices[sh[j%18].x]++; } },
                 playerGetStroke(pi) { if(this.games.points && this.pointsStrokes?.[pi]) return this.pointsStrokes[pi].indices[this.holeIndex]; if(this.games.nassau) { for(let mi=0; mi<this.nassauMatchups.length; mi++) { const m=this.nassauMatchups[mi]; const si=this.nassauStrokes[mi]; if(!si) continue; if(m.playerA===pi && !si.forB && si.indices[this.holeIndex]) return true; if(m.playerB===pi && si.forB && si.indices[this.holeIndex]) return true; } } if(this.games.team && this.teamStrokes?.[pi]) return this.teamStrokes[pi].indices[this.holeIndex]; return false; },
 
-                updateNassau() { for(let mi=0; mi<this.nassauMatchups.length; mi++) { const m=this.nassauMatchups[mi]; const si=this.nassauStrokes[mi]; if(!si) continue; m.front9.holesUp=0; m.back9.holesUp=0; m.overall.holesUp=0; for(let h=0; h<18; h++) { const ag=this.scores[h][m.playerA]; const bg=this.scores[h][m.playerB]; if(ag===null || bg===null) { m.holes[h].aNet=0; m.holes[h].bNet=0; m.holes[h].result=''; continue; } let an=ag; let bn=bg; const sv=si.indices[h]||0; if(sv>0) { if(si.forB) bn-=sv; else an-=sv; } m.holes[h].aNet=an; m.holes[h].bNet=bn; let r=''; if(an<bn) { r='W'; if(h<9) m.front9.holesUp++; else m.back9.holesUp++; m.overall.holesUp++; } else if(an>bn) { r='L'; if(h<9) m.front9.holesUp--; else m.back9.holesUp--; m.overall.holesUp--; } else { r='T'; } m.holes[h].result=r; } const b=m.bet||this.getPairBet(m.playerA,m.playerB); const frontAS=m.front9.holesUp===0; m.front9.winnings=frontAS?0:this.getMatchPlayWinnings(m.front9.holesUp,b); const backBetAmt=frontAS?b*2:b; m.back9.winnings=this.getMatchPlayWinnings(m.back9.holesUp,backBetAmt); m.front9.carriedOver=frontAS; m.overall.winnings=this.getMatchPlayWinnings(m.overall.holesUp,b*2); if(this.nassauPressMode==='aloha') { this.processAlohaPress(m,mi,b); } else { this.processAutoPress(m,mi,'front9',0,8,b); this.processAutoPress(m,mi,'back9',9,17,b); } } },
+                updateNassau() { for(let mi=0; mi<this.nassauMatchups.length; mi++) { const m=this.nassauMatchups[mi]; const si=this.nassauStrokes[mi]; if(!si) continue; m.front9.holesUp=0; m.back9.holesUp=0; m.overall.holesUp=0; for(let h=0; h<18; h++) { const ag=this.scores[h][m.playerA]; const bg=this.scores[h][m.playerB]; if(ag===null || bg===null) { m.holes[h].aNet=0; m.holes[h].bNet=0; m.holes[h].result=''; continue; } let an=ag; let bn=bg; const sv=si.indices[h]||0; if(sv>0) { if(si.forB) bn-=sv; else an-=sv; } m.holes[h].aNet=an; m.holes[h].bNet=bn; let r=''; if(an<bn) { r='W'; if(h<9) m.front9.holesUp++; else m.back9.holesUp++; m.overall.holesUp++; } else if(an>bn) { r='L'; if(h<9) m.front9.holesUp--; else m.back9.holesUp--; m.overall.holesUp--; } else { r='T'; } m.holes[h].result=r; } const b=m.bet||this.getPairBet(m.playerA,m.playerB); if(this.indieFormat==='nassau') { const frontAS=m.front9.holesUp===0; m.front9.winnings=frontAS?0:this.getMatchPlayWinnings(m.front9.holesUp,b); const backBetAmt=frontAS?b*2:b; m.back9.winnings=this.getMatchPlayWinnings(m.back9.holesUp,backBetAmt); m.front9.carriedOver=frontAS; m.overall.winnings=this.getMatchPlayWinnings(m.overall.holesUp,b*2); } else { m.front9.winnings=0; m.back9.winnings=0; m.front9.carriedOver=false; m.overall.winnings=this.getMatchPlayWinnings(m.overall.holesUp,b); } if(this.nassauPressMode==='aloha') { this.processAlohaPress(m,mi,b); } else if(this.nassauPressMode==='auto') { if(this.indieFormat==='nassau') { this.processAutoPress(m,mi,'front9',0,8,b); this.processAutoPress(m,mi,'back9',9,17,b); } else { this.processAutoPress(m,mi,'overall',0,17,b); } } else { m.presses=[]; } } },
                 processAutoPress(m, mi, sg, sh, eh, b) { m.presses=m.presses.filter(p=>p.segment!==sg); let am=[{startHole:sh, holesUp:0, isPress:false, hasSpawned:false}]; let completedToEnd=true; for(let h=sh; h<=eh; h++) { const hr=m.holes[h].result; if(hr==='') { completedToEnd=false; break; } for(const x of am) { if(h<x.startHole) continue; if(hr==='W') x.holesUp++; else if(hr==='L') x.holesUp--; } const np=[]; for(const x of am) { if(h>=x.startHole && !x.hasSpawned && Math.abs(x.holesUp)>=2) { const ah=am.some(y=>y.isPress && y.startHole===h+1) || np.some(y=>y.startHole===h+1); if(!ah && h+1<=eh) { np.push({startHole:h+1, holesUp:0, isPress:true, hasSpawned:false}); x.hasSpawned=true; } } } am=am.concat(np); } for(const x of am) { if(x.isPress) m.presses.push({segment:sg, startHole:x.startHole+1, holesUp:x.holesUp, active:true, winnings:this.getMatchPlayWinnings(x.holesUp, b)}); } },
                 processAlohaPress(m, mi, b) {
                     // Aloha mode: no auto presses on front9/back9. Only aloha presses on overall 18 when closed out.
@@ -2639,7 +2738,7 @@
                     if (val === null || val === undefined) return '';
                     if (val > 0) return 'color: var(--green); font-weight: 600;';
                     if (val < 0) return 'color: var(--red); font-weight: 600;';
-                    return 'color: var(--gray-200);';
+                    return 'color: var(--gray-400);';
                 },
 
                 getPointsForPosition(p, pc) { if(pc===3) return [5,3,1][p]||0; if(pc===4) return [7,5,3,1][p]||0; return [9,7,5,3,1][p]||0; },
@@ -2654,8 +2753,8 @@
                 generateMatches(segment) { segment.matches=[]; if(segment.box.length!==2 || segment.opponents.length<1) return; if(segment.opponents.length===1) { const match={teamB:[...segment.opponents], strokes:[], holeResults:Array(18).fill(null), holeDeltas:Array(18).fill(null), combined:{holesUp:0,winnings:0}, front3:{holesUp:0,winnings:0}, back3:{holesUp:0,winnings:0}, presses:[], label:`${segment.box.map(i=>this.players[i].name).join(' & ')} vs ${segment.opponents.map(i=>this.players[i].name).join(' & ')}`}; this.calcMatchStrokes(segment, match); segment.matches.push(match); } else if(segment.opponents.length===2) { const match={teamB:[...segment.opponents], strokes:[], holeResults:Array(18).fill(null), holeDeltas:Array(18).fill(null), combined:{holesUp:0,winnings:0}, front3:{holesUp:0,winnings:0}, back3:{holesUp:0,winnings:0}, presses:[], label:`${segment.box.map(i=>this.players[i].name).join(' & ')} vs ${segment.opponents.map(i=>this.players[i].name).join(' & ')}`}; this.calcMatchStrokes(segment, match); segment.matches.push(match); } else if(segment.opponents.length===3) { const opps=segment.opponents; const combos=[[opps[0],opps[1]],[opps[0],opps[2]],[opps[1],opps[2]]]; for(const tb of combos) { const match={teamB:tb, strokes:[], holeResults:Array(18).fill(null), holeDeltas:Array(18).fill(null), combined:{holesUp:0,winnings:0}, front3:{holesUp:0,winnings:0}, back3:{holesUp:0,winnings:0}, presses:[], label:`${segment.box.map(i=>this.players[i].name).join(' & ')} vs ${tb.map(i=>this.players[i].name).join(' & ')}`}; this.calcMatchStrokes(segment, match); segment.matches.push(match); } } },
                 calcMatchStrokes(segment, match) { const allFour=[...segment.box,...match.teamB]; const minHcp=Math.min(...allFour.map(pi=>this.players[pi].handicap)); match.strokes=allFour.map(pi=>({pi:pi, count:this.players[pi].handicap-minHcp})); const sh=this.holeData.map((h,x)=>({...h,x})).sort((a,b)=>a.hcp-b.hcp); for(const s of match.strokes) { s.indices=Array(18).fill(0); for(let j=0; j<s.count; j++) s.indices[sh[j%18].x]++; this.redistributeTeamStrokes(s); } },
                 redistributeTeamStrokes(strokeObj) { const segs=[[0,5],[6,11],[12,17]]; const getCounts=()=>segs.map(([s,e])=>{let c=0; for(let h=s;h<=e;h++) c+=(strokeObj.indices[h]||0); return c;}); let counts=getCounts(); let maxIter=10; while(maxIter-->0) { const mx=Math.max(...counts); const mn=Math.min(...counts); if(mx-mn<=1) break; const overIdx=counts.indexOf(mx); const underIdx=counts.indexOf(mn); const [os,oe]=segs[overIdx]; const [us,ue]=segs[underIdx]; let removeHole=-1, removeHcp=-1; for(let h=os;h<=oe;h++) { if((strokeObj.indices[h]||0)>0 && this.holeData[h].hcp>removeHcp) { removeHcp=this.holeData[h].hcp; removeHole=h; } } let addHole=-1, addHcp=999; for(let h=us;h<=ue;h++) { if((strokeObj.indices[h]||0)===0 && this.holeData[h].hcp<addHcp) { addHcp=this.holeData[h].hcp; addHole=h; } } if(addHole===-1) { for(let h=us;h<=ue;h++) { if((strokeObj.indices[h]||0)<2 && this.holeData[h].hcp<addHcp) { addHcp=this.holeData[h].hcp; addHole=h; } } } if(removeHole===-1 || addHole===-1) break; strokeObj.indices[removeHole]--; strokeObj.indices[addHole]++; counts=getCounts(); } },
-                updateTeamGame() { for(let si=0; si<this.teamSegments.length; si++) { const s=this.teamSegments[si]; if(s.box.length===0 || s.opponents.length===0) continue; for(const match of (s.matches||[])) { match.holeResults=Array(18).fill(null); match.holeDeltas=Array(18).fill(null); match.combined={holesUp:0,winnings:0}; match.front3={holesUp:0,winnings:0}; match.back3={holesUp:0,winnings:0}; match.presses=[]; const inBox=s.box.includes(0); const inMatch=inBox||match.teamB.includes(0); let cum=0; for(let h=s.startHole-1; h<s.endHole; h++) { const boxNets=s.box.map(pi=>{if(this.scores[h][pi]===null) return null; const g=this.scores[h][pi]; const st=match.strokes.find(x=>x.pi===pi); const hs=st ? (st.indices[h] || 0) : 0; return g-hs;}).filter(x=>x!==null); const oppNets=match.teamB.map(pi=>{if(this.scores[h][pi]===null) return null; const g=this.scores[h][pi]; const st=match.strokes.find(x=>x.pi===pi); const hs=st ? (st.indices[h] || 0) : 0; return g-hs;}).filter(x=>x!==null); if(boxNets.length===0||oppNets.length===0) continue; let holeResult=0; const bhigh=Math.max(...boxNets); const ohigh=Math.max(...oppNets); if(bhigh<ohigh) holeResult++; else if(bhigh>ohigh) holeResult--; const blow=Math.min(...boxNets); const olow=Math.min(...oppNets); if(blow<olow) holeResult++; else if(blow>olow) holeResult--; if(!inMatch) holeResult=0; else if(!inBox) holeResult=-holeResult; match.holeDeltas[h]=holeResult; cum+=holeResult; match.holeResults[h]=cum; const holeInSegment=h-(s.startHole-1); if(holeInSegment<3) { match.front3.holesUp+=holeResult; } else { match.back3.holesUp+=holeResult; } } match.combined.holesUp=cum; const b=this.teamBet; if(this.teamFormat==='nassau') { const frontAS = match.front3.holesUp === 0; match.front3.winnings = frontAS ? 0 : (match.front3.holesUp > 0 ? b : -b); const backBetAmt = frontAS ? b * 2 : b; match.back3.winnings = match.back3.holesUp > 0 ? backBetAmt : match.back3.holesUp < 0 ? -backBetAmt : 0; match.combined.winnings=cum>0?b*2:cum<0?-b*2:0; this.processTeamNassauPress(match,s.startHole-1,s.startHole+1,b); this.processTeamNassauPress(match,s.startHole+2,s.endHole-1,b); } else { match.combined.winnings=cum>0?b*2:cum<0?-b*2:0; this.processTeamPress(match); } } } },
-                processTeamPress(match) { if(!match.holeDeltas) return; const allHoles=match.holeDeltas.map((_,i)=>i).filter(i=>match.holeDeltas[i]!==null); if(allHoles.length===0) return; const sh=allHoles[0]; const eh=allHoles[allHoles.length-1]; let am=[{startHole:sh, cum:0, isPress:false, hasSpawned:false, running:Array(18).fill(null)}]; let completedToEnd=true; for(let h=sh; h<=eh; h++) { if(match.holeDeltas[h]===null) { completedToEnd=false; break; } const delta=match.holeDeltas[h]; for(const x of am) { if(h<x.startHole) continue; x.cum+=delta; x.running[h]=x.cum; } const np=[]; for(const x of am) { if(h>=x.startHole && !x.hasSpawned && Math.abs(x.cum)>=2) { const exists=am.some(y=>y.isPress && y.startHole===h+1) || np.some(y=>y.startHole===h+1); if(!exists && h+1<=eh) { np.push({startHole:h+1, cum:0, isPress:true, hasSpawned:false, running:Array(18).fill(null)}); x.hasSpawned=true; } } } am=am.concat(np); } for(const x of am) { if(x.isPress) { match.presses.push({startHole:x.startHole, cum:x.cum, running:x.running, winnings:x.cum>0?this.teamBet:x.cum<0?-this.teamBet:0, label:`Press (H${x.startHole+1})`}); } } },
+                updateTeamGame() { for(let si=0; si<this.teamSegments.length; si++) { const s=this.teamSegments[si]; if(s.box.length===0 || s.opponents.length===0) continue; for(const match of (s.matches||[])) { match.holeResults=Array(18).fill(null); match.holeDeltas=Array(18).fill(null); match.combined={holesUp:0,winnings:0}; match.front3={holesUp:0,winnings:0}; match.back3={holesUp:0,winnings:0}; match.presses=[]; const inBox=s.box.includes(0); const inMatch=inBox||match.teamB.includes(0); let cum=0; for(let h=s.startHole-1; h<s.endHole; h++) { const boxNets=s.box.map(pi=>{if(this.scores[h][pi]===null) return null; const g=this.scores[h][pi]; const st=match.strokes.find(x=>x.pi===pi); const hs=st ? (st.indices[h] || 0) : 0; return g-hs;}).filter(x=>x!==null); const oppNets=match.teamB.map(pi=>{if(this.scores[h][pi]===null) return null; const g=this.scores[h][pi]; const st=match.strokes.find(x=>x.pi===pi); const hs=st ? (st.indices[h] || 0) : 0; return g-hs;}).filter(x=>x!==null); if(boxNets.length===0||oppNets.length===0) continue; let holeResult=0; const blow=Math.min(...boxNets); const olow=Math.min(...oppNets); if(blow<olow) holeResult++; else if(blow>olow) holeResult--; if(this.teamBalls===2) { const bhigh=Math.max(...boxNets); const ohigh=Math.max(...oppNets); if(bhigh<ohigh) holeResult++; else if(bhigh>ohigh) holeResult--; } if(!inMatch) holeResult=0; else if(!inBox) holeResult=-holeResult; match.holeDeltas[h]=holeResult; cum+=holeResult; match.holeResults[h]=cum; const holeInSegment=h-(s.startHole-1); if(holeInSegment<3) { match.front3.holesUp+=holeResult; } else { match.back3.holesUp+=holeResult; } } match.combined.holesUp=cum; const b=this.teamBet; if(this.teamFormat==='nassau') { const frontAS = match.front3.holesUp === 0; match.front3.winnings = frontAS ? 0 : (match.front3.holesUp > 0 ? b : -b); const backBetAmt = frontAS ? b * 2 : b; match.back3.winnings = match.back3.holesUp > 0 ? backBetAmt : match.back3.holesUp < 0 ? -backBetAmt : 0; match.combined.winnings=cum>0?b*2:cum<0?-b*2:0; this.processTeamNassauPress(match,s.startHole-1,s.startHole+1,b); this.processTeamNassauPress(match,s.startHole+2,s.endHole-1,b); } else { match.combined.winnings=cum>0?b*2:cum<0?-b*2:0; this.processTeamPress(match); } } } },
+                processTeamPress(match) { if(!match.holeDeltas) return; const allHoles=match.holeDeltas.map((_,i)=>i).filter(i=>match.holeDeltas[i]!==null); if(allHoles.length===0) return; const sh=allHoles[0]; const eh=allHoles[allHoles.length-1]; let am=[{startHole:sh, cum:0, isPress:false, hasSpawned:false, running:Array(18).fill(null)}]; for(let h=sh; h<=eh; h++) { if(match.holeDeltas[h]===null) { break; } const delta=match.holeDeltas[h]; for(const x of am) { if(h<x.startHole) continue; x.cum+=delta; x.running[h]=x.cum; } const np=[]; for(const x of am) { if(h>=x.startHole && !x.hasSpawned && Math.abs(x.cum)>=2) { const exists=am.some(y=>y.isPress && y.startHole===h+1) || np.some(y=>y.startHole===h+1); if(!exists && h+1<=eh) { np.push({startHole:h+1, cum:0, isPress:true, hasSpawned:false, running:Array(18).fill(null)}); x.hasSpawned=true; } } } am=am.concat(np); } for(const x of am) { if(x.isPress) { match.presses.push({startHole:x.startHole, cum:x.cum, running:x.running, winnings:x.cum>0?this.teamBet:x.cum<0?-this.teamBet:0, label:`Press (H${x.startHole+1})`}); } } },
                 processTeamNassauPress(match, sh, eh, b) { let am=[{startHole:sh, cum:0, isPress:false, hasSpawned:false, running:Array(18).fill(null)}]; let completedToEnd=true; for(let h=sh; h<=eh; h++) { if(match.holeDeltas[h]===null) { completedToEnd=false; break; } const delta=match.holeDeltas[h]; for(const x of am) { if(h<x.startHole) continue; x.cum+=delta; x.running[h]=x.cum; } const np=[]; for(const x of am) { if(h>=x.startHole && !x.hasSpawned && Math.abs(x.cum)>=2) { const exists=am.some(y=>y.isPress && y.startHole===h+1) || np.some(y=>y.startHole===h+1); if(!exists && h+1<=eh) { np.push({startHole:h+1, cum:0, isPress:true, hasSpawned:false, running:Array(18).fill(null)}); x.hasSpawned=true; } } } am=am.concat(np); } for(const x of am) { if(x.isPress) { match.presses.push({startHole:x.startHole, cum:x.cum, running:x.running, winnings:x.cum>0?b:x.cum<0?-b:0, label:`Press (H${x.startHole+1})`}); } } },
                 getTeamNames(sIdx) { const s=this.teamSegments[sIdx]; if(!s || s.matches.length===0) return ''; return s.matches[0].label||''; },
                 getMatchLabel(sIdx, mIdx) { const s=this.teamSegments[sIdx]; if(!s || !s.matches[mIdx]) return ''; return s.matches[mIdx].label||''; },
@@ -2663,10 +2762,75 @@
                 getTeamPressHoleStatus(sIdx, mIdx, pIdx, hi) { const s=this.teamSegments?.[sIdx]; if(!s?.matches?.[mIdx]) return null; const m=s.matches[mIdx]; if(!m?.presses?.[pIdx]) return null; return m.presses[pIdx].running[hi]; },
                 getTeamNassauRunning(sIdx, mIdx, half, hi) { const s=this.teamSegments?.[sIdx]; if(!s?.matches?.[mIdx]) return null; const m=s.matches[mIdx]; if(!m||!m.holeDeltas) return null; const segStart=s.startHole-1; const frontEnd=segStart+2; const backStart=segStart+3; const backEnd=segStart+5; let sh,eh; if(half==='front3') { sh=segStart; eh=frontEnd; } else { sh=backStart; eh=backEnd; } if(hi<sh || hi>eh) return null; if(m.holeDeltas[hi]===null) return null; let cum=0; for(let h=sh; h<=hi; h++) { if(m.holeDeltas[h]===null) break; cum+=m.holeDeltas[h]; } return cum; },
 
-                goToScreen(s) { if(this.roundStarted) { if(this.currentScreen==='scoreEntry') this.autoFillPar(this.holeIndex); this.updateAllGameLogic(); } this.currentScreen=s; this.saveState(); },
+                goToScreen(s) { if(this.roundStarted) { this.updateAllGameLogic(); } this.currentScreen=s; this.saveState(); },
                 autoFillPar(hi) { const p=this.holeData[hi].par; for(let p2=0; p2<this.playerCount; p2++) if(this.scores[hi][p2]===null) this.scores[hi][p2]=p; },
                 endRound() { for(let h=0; h<18; h++) this.autoFillPar(h); this.updateAllGameLogic(); this.currentScreen='summary'; this.saveState(); this.saveToCloud('completed'); },
-                nextHole() { if(this.holeIndex<17) { this.autoFillPar(this.holeIndex); this.holeIndex++; this.updateAllGameLogic(); this.saveState(); if(this.holeIndex % 3 === 0) this.saveToCloud('in_progress'); if(this.games.team && (this.holeIndex === 6 || this.holeIndex === 12)) { const startH = this.holeIndex + 1; const endH = this.holeIndex + 6; setTimeout(() => alert(`Time to switch teams!\nHead to the Teams tab to set your teams for holes ${startH}-${endH}.`), 200); } } },
+                confirmScores() { for(let h=0; h<18; h++) this.autoFillPar(h); this.updateAllGameLogic(); this.currentScreen='scorecard'; this.saveState(); this.saveToCloud('completed'); },
+                nextHole() { if(this.holeIndex<17) { this.autoFillPar(this.holeIndex); this.holeIndex++; this.updateAllGameLogic(); this.saveState(); if(this.holeIndex % 3 === 0) this.saveToCloud('in_progress'); if(this.games.team && this.holeIndex === 6) { const startH = this.holeIndex + 1; const endH = this.holeIndex + 6; setTimeout(() => alert(`Time to switch teams!\nHead to the Teams tab to set your teams for holes ${startH}-${endH}.`), 200); } if(this.games.team && this.holeIndex === 12) { this.autoAssignThirdSegment(); } } },
+                autoAssignThirdSegment() {
+                    // Auto-assign segment 2 (holes 13-18) by rotation
+                    if (this.teamSegments.length < 3) return;
+                    const seg2 = this.teamSegments[2];
+                    // Skip if already assigned
+                    if (seg2.box.length >= 2 && seg2.opponents.length >= 1) {
+                        setTimeout(() => alert('Teams for Holes 13-18 are set!\n' + this.getTeamNames(2)), 200);
+                        return;
+                    }
+                    const tpc = this.teamPlayerCount;
+                    const allPlayers = Array.from({length: tpc}, (_, i) => i);
+
+                    // Collect who has been in the box across segments 0 and 1
+                    const boxHistory = new Set();
+                    for (let si = 0; si < 2; si++) {
+                        const s = this.teamSegments[si];
+                        for (const p of s.box) boxHistory.add(p);
+                    }
+
+                    if (tpc === 5) {
+                        // 5-man game: whoever hasn't been in the box yet gets the box
+                        const neverInBox = allPlayers.filter(p => !boxHistory.has(p));
+                        if (neverInBox.length === 2) {
+                            seg2.box = [...neverInBox];
+                            seg2.opponents = allPlayers.filter(p => !neverInBox.includes(p));
+                            seg2.unassigned = [];
+                            this.generateMatches(seg2);
+                            this.updateTeamGame();
+                            this.saveState();
+                            const names = neverInBox.map(p => this.players[p].name).join(' & ');
+                            setTimeout(() => alert(`Teams for Holes 13-18 auto-set!\nBox: ${names}`), 200);
+                            return;
+                        }
+                        // Edge case: can't determine (e.g. overlap) — fall through to manual
+                    } else if (tpc === 4) {
+                        // 4-man game: player 0's partner = whoever they haven't been paired with
+                        const partneredWith = [];
+                        for (let si = 0; si < 2; si++) {
+                            const s = this.teamSegments[si];
+                            if (s.box.includes(0)) {
+                                const partner = s.box.find(p => p !== 0);
+                                if (partner !== undefined) partneredWith.push(partner);
+                            } else {
+                                const partner = s.opponents.find(p => p !== 0);
+                                if (partner !== undefined) partneredWith.push(partner);
+                            }
+                        }
+                        const remaining = allPlayers.filter(p => p !== 0 && !partneredWith.includes(p));
+                        if (remaining.length === 1) {
+                            const newPartner = remaining[0];
+                            seg2.box = [0, newPartner];
+                            seg2.opponents = allPlayers.filter(p => p !== 0 && p !== newPartner);
+                            seg2.unassigned = [];
+                            this.generateMatches(seg2);
+                            this.updateTeamGame();
+                            this.saveState();
+                            const partnerName = this.players[newPartner].name;
+                            setTimeout(() => alert(`Teams for Holes 13-18 auto-set!\nYou're with ${partnerName}.`), 200);
+                            return;
+                        }
+                    }
+                    // Fallback: prompt manual assignment
+                    setTimeout(() => alert('Time to switch teams!\nHead to the Teams tab to set your teams for holes 13-18.'), 200);
+                },
                 previousHole() { if(this.holeIndex>0) { this.autoFillPar(this.holeIndex); this.holeIndex--; this.updateAllGameLogic(); this.saveState(); } },
                 changeScore(pi, d) { let cs=this.scores[this.holeIndex][pi]; if(cs===null) cs=this.currentPar; const ns=Math.max(1, Math.min(13, cs+d)); this.scores[this.holeIndex][pi]=ns; this.updateAllGameLogic(); this.saveState(); },
                 recalcStrokes() { const sh = this.holeData.map((h, x) => ({...h, x})).sort((a, b) => a.hcp - b.hcp); const ah = this.players.slice(0, this.playerCount).map(p => p.handicap); const mh = Math.min(...ah); if (this.games.nassau && this.nassauStrokes && this.nassauMatchups) { for (let i = 0; i < this.nassauMatchups.length; i++) { const m = this.nassauMatchups[i]; const aH = this.players[m.playerA].handicap; const bH = this.players[m.playerB].handicap; const td = Math.abs(bH - aH); const forB = bH > aH; if (!this.nassauStrokes[i]) this.nassauStrokes[i] = {forB, count: td, indices: Array(18).fill(0)}; this.nassauStrokes[i].forB = forB; this.nassauStrokes[i].count = td; this.nassauStrokes[i].indices = Array(18).fill(0); for (let j = 0; j < td; j++) this.nassauStrokes[i].indices[sh[j%18].x]++; } } if (this.games.team && this.teamStrokes) { const tpc = this.teamPlayerCount; const tah = this.players.slice(0, tpc).map(p => p.handicap); const tmh = Math.min(...tah); for (let pi = 0; pi < tpc; pi++) { const sc = tah[pi] - tmh; this.teamStrokes[pi] = {count: sc, indices: Array(18).fill(0)}; for (let j = 0; j < sc; j++) this.teamStrokes[pi].indices[sh[j%18].x]++; } } if (this.games.points && this.pointsStrokes) { for (let pi = 0; pi < this.playerCount; pi++) { const sc = ah[pi] - mh; this.pointsStrokes[pi] = {count: sc, indices: Array(18).fill(0)}; for (let j = 0; j < sc; j++) this.pointsStrokes[pi].indices[sh[j%18].x]++; } } },
@@ -2686,24 +2850,37 @@
                     }
                     return t;
                 },
+                getPlayerTeamSegment(pi, sIdx) {
+                    // Get a player's team winnings for a specific 6-hole segment
+                    const s = this.teamSegments[sIdx];
+                    if (!s) return 0;
+                    const p0InBox = s.box.includes(0);
+                    let t = 0;
+                    for (const match of (s.matches || [])) {
+                        const piInBox = s.box.includes(pi); const piInOpp = match.teamB.includes(pi);
+                        if (!piInBox && !piInOpp) continue;
+                        const sameTeamAsP0 = (piInBox && p0InBox) || (piInOpp && !p0InBox);
+                        let tw = 0;
+                        if (this.teamFormat === 'nassau') {
+                            tw = (match.front3 ? match.front3.winnings : 0) + (match.back3 ? match.back3.winnings : 0) + (match.combined ? match.combined.winnings : 0);
+                        } else {
+                            tw = match.combined ? match.combined.winnings : 0;
+                        }
+                        let pw = 0; if (match.presses) for (const p of match.presses) pw += p.winnings;
+                        t += sameTeamAsP0 ? (tw + pw) : -(tw + pw);
+                    }
+                    return t;
+                },
+                getTeamSegmentLabel(sIdx) {
+                    // Friendly label for each 6-hole segment
+                    const labels = ['Holes 1-6', 'Holes 7-12', 'Holes 13-18'];
+                    return labels[sIdx] || ('Segment ' + (sIdx + 1));
+                },
                 getPlayerTeamTotal(pi) {
                     // Winnings stored from player 0's perspective. Same team as P0 → same sign. Opposite → flip.
-                    let t=0;
-                    for(const s of this.teamSegments) {
-                        const p0InBox=s.box.includes(0);
-                        for(const match of (s.matches||[])) {
-                            const piInBox=s.box.includes(pi); const piInOpp=match.teamB.includes(pi);
-                            if(!piInBox && !piInOpp) continue;
-                            const sameTeamAsP0=(piInBox && p0InBox)||(piInOpp && !p0InBox);
-                            let tw=0;
-                            if(this.teamFormat==='nassau') {
-                                tw=(match.front3?match.front3.winnings:0)+(match.back3?match.back3.winnings:0)+(match.combined?match.combined.winnings:0);
-                            } else {
-                                tw=match.combined?match.combined.winnings:0;
-                            }
-                            let pw=0; if(match.presses) for(const p of match.presses) pw+=p.winnings;
-                            t+=sameTeamAsP0?(tw+pw):-(tw+pw);
-                        }
+                    let t = 0;
+                    for (let sIdx = 0; sIdx < this.teamSegments.length; sIdx++) {
+                        t += this.getPlayerTeamSegment(pi, sIdx);
                     }
                     return t;
                 },
@@ -2729,12 +2906,27 @@
                     this.loginLoading = true;
                     try {
                         if (this.clubSlug === 'flog') {
+                            // FLOG uses the players table (unified PIN from Saturday Game lobby)
                             const { data: players } = await sb.from('players')
                                 .select('id, name, pin').eq('active', true);
                             const player = (players || []).find(p => p.name.toLowerCase() === name.toLowerCase());
-                            if (!player) { this.loginError = 'Name not found. Check spelling.'; this.loginLoading = false; return; }
-                            if (!player.pin) { this.loginError = 'No PIN set. Log in at the lobby (floggames.com) first to set your PIN.'; this.loginLoading = false; return; }
-                            if (player.pin !== pin) { this.loginError = 'Wrong PIN. Try again.'; this.loginLoading = false; return; }
+
+                            if (!player) {
+                                this.loginError = 'Name not found. Check spelling.';
+                                this.loginLoading = false;
+                                return;
+                            }
+                            if (!player.pin) {
+                                this.loginError = 'No PIN set. Log in at the lobby (floggames.com) first to set your PIN.';
+                                this.loginLoading = false;
+                                return;
+                            }
+                            if (player.pin !== pin) {
+                                this.loginError = 'Wrong PIN. Try again.';
+                                this.loginLoading = false;
+                                return;
+                            }
+                            // Check role from saturday_bets_users
                             let userRole = 'member';
                             try {
                                 const { data: sbu } = await sb.from('saturday_bets_users')
@@ -2747,17 +2939,30 @@
                             this.isAdmin = (userRole === 'admin' || userRole === 'super_admin');
                             this.userRole = userRole;
                         } else {
+                            // Other clubs use saturday_bets_users with PIN hash
                             const pinHash = await hashPin(pin);
                             const { data: user, error } = await sb.from('saturday_bets_users')
-                                .select('*').eq('user_name', name.toLowerCase())
-                                .eq('club_id', this.club?.id).single();
-                            if (!user) { this.loginError = 'Name not found. Check spelling or create an account.'; this.loginLoading = false; return; }
-                            if (user.pin_hash !== pinHash) { this.loginError = 'Wrong PIN. Try again.'; this.loginLoading = false; return; }
+                                .select('*')
+                                .eq('user_name', name.toLowerCase())
+                                .eq('club_id', this.club?.id)
+                                .single();
+
+                            if (!user) {
+                                this.loginError = 'Name not found. Check spelling or create an account.';
+                                this.loginLoading = false;
+                                return;
+                            }
+                            if (user.pin_hash !== pinHash) {
+                                this.loginError = 'Wrong PIN. Try again.';
+                                this.loginLoading = false;
+                                return;
+                            }
                             this.loggedInUser = user.user_name;
                             this.userPin = pin;
                             this.isAdmin = (user.role === 'admin' || user.role === 'super_admin');
                             this.userRole = user.role || 'member';
                         }
+
                         localStorage.setItem('sbUser', this.loggedInUser);
                         localStorage.setItem('sbPin', this.userPin);
                         localStorage.setItem('sbClub', this.clubSlug);
@@ -2773,7 +2978,9 @@
                             sessionStorage.removeItem('flog_admin_mode');
                             this.$nextTick(() => { this.loadAdminUsers(); this.showAdminPanel = true; });
                         }
-                    } catch(e) { this.loginError = 'Login failed. Try again.'; }
+                    } catch(e) {
+                        this.loginError = 'Login failed. Try again.';
+                    }
                     this.loginLoading = false;
                 },
 
@@ -2784,19 +2991,21 @@
                     }
                     const name = this.loginName.trim();
                     const pin = this.loginPin.trim();
-                    const confirmP = this.confirmPin.trim();
+                    const confirm = this.confirmPin.trim();
                     if (!name) { this.loginError = 'Enter your name'; return; }
                     if (!/^\d{4}$/.test(pin)) { this.loginError = 'PIN must be 4 digits'; return; }
-                    if (pin !== confirmP) { this.loginError = 'PINs do not match'; return; }
+                    if (pin !== confirm) { this.loginError = 'PINs do not match'; return; }
                     if (!sb || !this.club) { this.loginError = 'No connection to server'; return; }
 
                     this.loginLoading = true;
                     try {
                         const pinHash = await hashPin(pin);
+                        // Check if first user at this club → auto-admin
                         const { count } = await sb.from('saturday_bets_users')
                             .select('*', { count: 'exact', head: true })
                             .eq('club_id', this.club.id);
                         const role = (count === 0) ? 'admin' : 'member';
+
                         const { error } = await sb.from('saturday_bets_users').insert({
                             user_name: name.toLowerCase(),
                             pin_hash: pinHash,
@@ -2809,6 +3018,7 @@
                             this.loginLoading = false;
                             return;
                         }
+                        // Auto-login after registration
                         this.loggedInUser = name.toLowerCase();
                         this.userPin = pin;
                         this.isAdmin = (role === 'admin');
@@ -2826,11 +3036,14 @@
                         if (role === 'admin') {
                             alert('Welcome! You are the first member and have been made the club admin.');
                         }
-                    } catch(e) { this.loginError = 'Registration failed. Try again.'; }
+                    } catch(e) {
+                        this.loginError = 'Registration failed. Try again.';
+                    }
                     this.loginLoading = false;
                 },
 
                 async verifyLogin(name, pin) {
+                    // Check saved club matches current club
                     const savedClub = localStorage.getItem('sbClub');
                     if (savedClub && savedClub !== this.clubSlug) {
                         localStorage.removeItem('sbUser');
@@ -2869,8 +3082,10 @@
                         } else {
                             const pinHash = await hashPin(pin);
                             const { data: user } = await sb.from('saturday_bets_users')
-                                .select('*').eq('user_name', name.toLowerCase())
-                                .eq('club_id', this.club?.id).single();
+                                .select('*')
+                                .eq('user_name', name.toLowerCase())
+                                .eq('club_id', this.club?.id)
+                                .single();
                             if (user && user.pin_hash === pinHash) {
                                 this.loggedInUser = user.user_name;
                                 this.userPin = pin;
@@ -2907,7 +3122,7 @@
                     if (!sb) return;
                     try {
                         const { data } = await sb.from('saturday_bets_users')
-                            .select('id, user_name, created_at, is_admin, role')
+                            .select('id, user_name, created_at, is_admin')
                             .eq('club_id', this.club?.id)
                             .order('user_name');
                         this.adminUsers = data || [];
@@ -2975,6 +3190,22 @@
                                 if (b < st.playerCount) positions[b].amount -= w;
                             }
                         }
+                        if (st.games?.team && st.teamSegments) {
+                            for (const seg of st.teamSegments) {
+                                for (const match of (seg.matches || [])) {
+                                    const inBox = seg.box.includes(0);
+                                    if (!inBox && !match.teamB?.includes(0)) continue;
+                                    const w = (match.combined?.winnings||0) + ((match.presses||[]).reduce((s,p)=>s+(p.winnings||0),0));
+                                    if (inBox) positions[0].amount += w;
+                                    else positions[0].amount -= w;
+                                }
+                            }
+                        }
+                        if (st.games?.points && st.pointsMoneyTotals) {
+                            for (let pi = 0; pi < st.playerCount; pi++) {
+                                if (positions[pi]) positions[pi].amount += (st.pointsMoneyTotals[pi] || 0);
+                            }
+                        }
                         st._position = data.total_winnings || 0;
                         st._playerPositions = positions;
                         this.spectatingState = st;
@@ -3012,7 +3243,9 @@
                     return {
                         playerCount: this.playerCount, players: this.players, courseName: this.courseName,
                         teeName: this.teeName, startHole: this.startHole, games: this.games,
-                        nassauBets: this.nassauBets, nassauPressMode: this.nassauPressMode, teamBet: this.teamBet, teamFormat: this.teamFormat,
+                        nassauBets: this.nassauBets, nassauPressMode: this.nassauPressMode, indieFormat: this.indieFormat,
+                        indieGameType: this.indieGameType, teamGameType: this.teamGameType,
+                        teamBet: this.teamBet, teamFormat: this.teamFormat, teamBalls: this.teamBalls,
                         pointsBet: this.pointsBet, useTeamPro: this.useTeamPro, roundStarted: this.roundStarted, scores: this.scores,
                         holeIndex: this.holeIndex, currentScreen: this.currentScreen,
                         nassauMatchups: this.nassauMatchups, nassauStrokes: this.nassauStrokes,
@@ -3029,13 +3262,13 @@
                         const pNames = this.players.slice(0, this.playerCount).map(p => p.name);
                         const payload = {
                             user_name: this.loggedInUser,
+                            club_id: this.club?.id,
                             date: today,
                             course: this.courseName,
                             tees: this.teeName,
                             status: status || 'in_progress',
                             player_names: pNames,
                             total_winnings: this.currentPosition,
-                            club_id: this.club?.id,
                             state: this.getStateSnapshot()
                         };
                         if (this.cloudRoundId) {
@@ -3132,6 +3365,22 @@
                             for (const si of st.nassauStrokes) { si.forB = si.forThem; }
                         }
                         Object.assign(this, st);
+                        // Backward compat: add new game type fields if missing
+                        if (!this.indieFormat) this.indieFormat = 'straight';
+                        if (!this.indieGameType) {
+                            if (this.games.nassau) {
+                                if (this.nassauPressMode === 'aloha') this.indieGameType = 'straight18_aloha';
+                                else if (this.nassauPressMode === 'auto') this.indieGameType = 'straight18_auto';
+                                else this.indieGameType = 'straight18';
+                            } else { this.indieGameType = 'none'; }
+                        }
+                        if (!this.teamGameType) {
+                            if (this.games.team) {
+                                this.teamGameType = this.teamFormat === 'nassau' ? 'nassau_2ball_auto' : 'straight6_2ball_auto';
+                            } else { this.teamGameType = 'none'; }
+                        }
+                        if (this.teamBalls === undefined) this.teamBalls = 2;
+                        if (!this.nassauPressMode) this.nassauPressMode = 'auto';
                     }
                 }
             };
