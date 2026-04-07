@@ -1049,12 +1049,25 @@
                     <!-- Register Mode -->
                     <template x-if="loginMode === 'register'">
                         <div style="text-align:center;">
-                            <div style="font-size:12px;color:var(--gray-400);margin-bottom:16px;">Create a new account</div>
-                            <input type="text" x-model="loginName" placeholder="Your name" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gold-dark);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;">
-                            <input type="tel" x-model="loginPin" placeholder="4-digit PIN" maxlength="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gold-dark);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;">
-                            <input type="tel" x-model="confirmPin" placeholder="Confirm PIN" maxlength="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gold-dark);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;" @keyup.enter="doRegister()">
-                            <div x-show="loginError" x-text="loginError" style="color:var(--red);font-size:11px;margin-bottom:8px;"></div>
-                            <button @click="doRegister()" :disabled="loginLoading" style="width:100%;padding:10px;border-radius:8px;background:var(--gold);color:var(--black);font-weight:700;border:none;font-size:14px;cursor:pointer;margin-top:8px;opacity:" + (loginLoading ? '0.6' : '1') + ";" x-text="loginLoading ? 'Creating account...' : 'Create Account'"></button>
+                            <template x-if="clubSlug === 'flog'">
+                                <div>
+                                <div style="font-size:13px;color:var(--gray-400);margin-bottom:16px;line-height:1.6;">
+                                    New accounts are set up at the lobby.<br>
+                                    Go to <strong style="color:var(--gold);">floggames.com</strong> and select your name to set your PIN.
+                                </div>
+                                <a href="/" style="display:inline-block;padding:10px 24px;border-radius:8px;background:var(--gold);color:var(--navy);font-weight:700;font-size:14px;text-decoration:none;cursor:pointer;">Go to Lobby</a>
+                                </div>
+                            </template>
+                            <template x-if="clubSlug !== 'flog'">
+                                <div>
+                                <div style="font-size:12px;color:var(--gray-400);margin-bottom:16px;">Create your account at <span style="color:var(--gold);font-weight:600;" x-text="club?.display_name || 'this club'"></span></div>
+                                <input type="text" x-model="loginName" placeholder="Your name" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gray-200);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;">
+                                <input type="tel" x-model="loginPin" placeholder="4-digit PIN" maxlength="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gray-200);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;">
+                                <input type="tel" x-model="confirmPin" placeholder="Confirm PIN" maxlength="4" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--gray-200);background:var(--black);color:var(--white);font-size:14px;margin-bottom:8px;box-sizing:border-box;">
+                                <div x-show="loginError" x-text="loginError" style="color:var(--red);font-size:11px;margin-bottom:8px;"></div>
+                                <button @click="doRegister()" :disabled="loginLoading" style="width:100%;padding:10px;border-radius:8px;background:var(--green-dark);color:#FFFFFF;font-weight:700;border:none;font-size:14px;cursor:pointer;margin-top:8px;" x-text="loginLoading ? 'Creating...' : 'Create Account'"></button>
+                                </div>
+                            </template>
                         </div>
                     </template>
                 </div>
@@ -1241,7 +1254,14 @@
                             </div>
                             <template x-for="(player, idx) in players.slice(0, playerCount)" :key="idx">
                                 <div class="player-input-row">
-                                    <input type="text" x-model="players[idx].name" placeholder="Player name" style="flex: 1;">
+                                    <div style="flex: 1; position: relative;">
+                                        <input type="text" x-model="players[idx].name" :placeholder="clubRoster.length ? 'Type or select player' : 'Player name'" :list="'roster-' + idx" style="width: 100%; background-color: var(--black); border: 1px solid var(--gray-200); color: var(--white); padding: 8px; border-radius: 4px; font-size: 14px; box-sizing: border-box;" @change="(() => { const match = clubRoster.find(r => r.player_name.toLowerCase() === players[idx].name.toLowerCase()); if (match) selectRosterPlayer(idx, match); })()">
+                                        <datalist :id="'roster-' + idx">
+                                            <template x-for="r in clubRoster" :key="r.player_name">
+                                                <option :value="r.player_name" x-text="r.player_name + ' (' + r.handicap + ')'"></option>
+                                            </template>
+                                        </datalist>
+                                    </div>
                                     <input type="number" x-model.number="players[idx].handicap" placeholder="HCP" class="handicap-input" min="0" max="54">
                                 </div>
                             </template>
@@ -2249,6 +2269,14 @@
         let sb = null;
         try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) { console.warn('Supabase not available, running offline'); }
 
+        /* ── Club Detection from URL ── */
+        function getClubSlug() {
+            const path = window.location.pathname;
+            const match = path.match(/\/bets\/([a-z0-9-]+)/);
+            return match ? match[1] : 'flog';
+        }
+        const CLUB_SLUG = getClubSlug();
+
         /* ── PIN Hashing ── */
         async function hashPin(pin) {
             const encoder = new TextEncoder();
@@ -2260,7 +2288,8 @@
         function saturdayBets() {
             return {
                 /* ── Cloud & Auth State ── */
-                loggedInUser: null, userPin: null, isAdmin: false, cloudRoundId: null, cloudSaving: false,
+                loggedInUser: null, userPin: null, isAdmin: false, userRole: 'member', cloudRoundId: null, cloudSaving: false,
+                club: null, clubSlug: CLUB_SLUG, clubRoster: [],
                 roundHistory: [], historyLoading: false, viewingHistory: false,
                 showLogin: false, loginName: '', loginPin: '', confirmPin: '', loginError: '', loginMode: 'login', loginLoading: false,
                 adminUsers: [], showAdminPanel: false,
@@ -2295,7 +2324,51 @@
                 get pointsTotal() { return this.pointsMoneyTotals[0] || 0; },
                 get currentPosition() { return this.getPlayerTotal(0); },
 
+                async loadClub() {
+                    if (!sb) return;
+                    try {
+                        const { data } = await sb.from('clubs').select('*').eq('slug', this.clubSlug).single();
+                        if (data) {
+                            this.club = data;
+                            document.title = data.display_name + ' - Golf Scorecard';
+                            if (data.primary_color) {
+                                document.documentElement.style.setProperty('--gold', data.primary_color);
+                                document.documentElement.style.setProperty('--gold-dark', data.primary_color);
+                            }
+                            if (data.default_course && !this.roundStarted) {
+                                this.courseName = data.default_course;
+                                const course = COURSES[this.courseName];
+                                if (course) {
+                                    this.teeName = course.defaultTee;
+                                    this.holeData = buildHoleData(course.defaultTee, this.courseName);
+                                }
+                            }
+                        }
+                    } catch(e) { console.warn('Could not load club:', e); }
+                },
+
+                async loadRoster() {
+                    if (!sb || !this.club) return;
+                    try {
+                        const { data } = await sb.from('club_roster')
+                            .select('player_name, handicap')
+                            .eq('club_id', this.club.id)
+                            .eq('is_active', true)
+                            .order('player_name');
+                        this.clubRoster = data || [];
+                    } catch(e) { console.warn('Could not load roster:', e); }
+                },
+
+                selectRosterPlayer(idx, rosterPlayer) {
+                    this.players[idx].name = rosterPlayer.player_name;
+                    this.players[idx].handicap = rosterPlayer.handicap || 0;
+                    this.saveState();
+                },
+
                 init() {
+                    this.loadClub().then(() => {
+                        this.loadRoster();
+                    });
                     // Restore login from localStorage with DB verification
                     const savedUser = localStorage.getItem('sbUser');
                     const savedPin = localStorage.getItem('sbPin');
@@ -2361,7 +2434,7 @@
                     // Save to Supabase so all users get it
                     if (sb) {
                         try {
-                            await sb.from('custom_courses').upsert({ name: name, pars: JSON.stringify(pars), hcps: JSON.stringify(hcps) }, { onConflict: 'name' });
+                            await sb.from('custom_courses').upsert({ name: name, club_id: this.club?.id, pars: JSON.stringify(pars), hcps: JSON.stringify(hcps) }, { onConflict: 'name' });
                         } catch(e) { console.warn('Could not save custom course to cloud:', e); }
                     }
                     this.courseName = name;
@@ -2373,7 +2446,7 @@
                 async loadCustomCourses() {
                     if (!sb) return;
                     try {
-                        const { data } = await sb.from('custom_courses').select('*');
+                        const { data } = await sb.from('custom_courses').select('*').eq('club_id', this.club?.id);
                         if (data) {
                             for (const row of data) {
                                 if (!COURSES[row.name]) {
@@ -2647,7 +2720,7 @@
                 formatMoney(a) { if(a===0) return '–'; const abs=Math.abs(a); return (a>0?'+':'')+'$'+(abs%1===0?abs.toFixed(0):abs.toFixed(2)); },
                 /* ── Login ── */
                 async doLogin() {
-                    const name = this.loginName.trim().toLowerCase();
+                    const name = this.loginName.trim();
                     const pin = this.loginPin.trim();
                     if (!name) { this.loginError = 'Enter your name'; return; }
                     if (!/^\d{4}$/.test(pin)) { this.loginError = 'PIN must be 4 digits'; return; }
@@ -2655,106 +2728,166 @@
 
                     this.loginLoading = true;
                     try {
-                        const pinHash = await hashPin(pin);
-                        const { data: user, error } = await sb.from('saturday_bets_users')
-                            .select('*').eq('user_name', name).single();
-
-                        if (!user) {
-                            this.loginError = 'No account found. Create one first!';
-                            this.loginLoading = false;
-                            return;
+                        if (this.clubSlug === 'flog') {
+                            const { data: players } = await sb.from('players')
+                                .select('id, name, pin').eq('active', true);
+                            const player = (players || []).find(p => p.name.toLowerCase() === name.toLowerCase());
+                            if (!player) { this.loginError = 'Name not found. Check spelling.'; this.loginLoading = false; return; }
+                            if (!player.pin) { this.loginError = 'No PIN set. Log in at the lobby (floggames.com) first to set your PIN.'; this.loginLoading = false; return; }
+                            if (player.pin !== pin) { this.loginError = 'Wrong PIN. Try again.'; this.loginLoading = false; return; }
+                            let userRole = 'member';
+                            try {
+                                const { data: sbu } = await sb.from('saturday_bets_users')
+                                    .select('role, is_admin').eq('user_name', name.toLowerCase())
+                                    .eq('club_id', this.club?.id).single();
+                                if (sbu) userRole = sbu.role || (sbu.is_admin ? 'admin' : 'member');
+                            } catch(e) {}
+                            this.loggedInUser = player.name.toLowerCase();
+                            this.userPin = pin;
+                            this.isAdmin = (userRole === 'admin' || userRole === 'super_admin');
+                            this.userRole = userRole;
+                        } else {
+                            const pinHash = await hashPin(pin);
+                            const { data: user, error } = await sb.from('saturday_bets_users')
+                                .select('*').eq('user_name', name.toLowerCase())
+                                .eq('club_id', this.club?.id).single();
+                            if (!user) { this.loginError = 'Name not found. Check spelling or create an account.'; this.loginLoading = false; return; }
+                            if (user.pin_hash !== pinHash) { this.loginError = 'Wrong PIN. Try again.'; this.loginLoading = false; return; }
+                            this.loggedInUser = user.user_name;
+                            this.userPin = pin;
+                            this.isAdmin = (user.role === 'admin' || user.role === 'super_admin');
+                            this.userRole = user.role || 'member';
                         }
-                        if (user.pin_hash !== pinHash) {
-                            this.loginError = 'Wrong PIN. Try again.';
-                            this.loginLoading = false;
-                            return;
-                        }
-                        // Success
-                        this.loggedInUser = user.user_name;
-                        this.userPin = pin;
-                        this.isAdmin = user.is_admin || false;
-                        localStorage.setItem('sbUser', user.user_name);
-                        localStorage.setItem('sbPin', pin);
+                        localStorage.setItem('sbUser', this.loggedInUser);
+                        localStorage.setItem('sbPin', this.userPin);
+                        localStorage.setItem('sbClub', this.clubSlug);
                         this.showLogin = false;
                         this.loginError = '';
-                        // Set first player name to logged-in user (if round not started)
                         if (!this.roundStarted && this.players.length > 0) {
-                            this.players[0].name = user.user_name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                            const displayName = this.loggedInUser.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                            this.players[0].name = displayName;
                             this.saveState();
                         }
-                    } catch(e) {
-                        this.loginError = 'Login failed. Try again.';
-                    }
+                        const adminMode = sessionStorage.getItem('flog_admin_mode');
+                        if (adminMode === 'true' && this.isAdmin) {
+                            sessionStorage.removeItem('flog_admin_mode');
+                            this.$nextTick(() => { this.loadAdminUsers(); this.showAdminPanel = true; });
+                        }
+                    } catch(e) { this.loginError = 'Login failed. Try again.'; }
                     this.loginLoading = false;
                 },
 
                 async doRegister() {
-                    const name = this.loginName.trim().toLowerCase();
+                    if (this.clubSlug === 'flog') {
+                        this.loginError = 'New accounts are set up at the lobby. Go to floggames.com and select your name to set your PIN.';
+                        return;
+                    }
+                    const name = this.loginName.trim();
                     const pin = this.loginPin.trim();
-                    const confirmPin = this.confirmPin.trim();
+                    const confirmP = this.confirmPin.trim();
                     if (!name) { this.loginError = 'Enter your name'; return; }
                     if (!/^\d{4}$/.test(pin)) { this.loginError = 'PIN must be 4 digits'; return; }
-                    if (pin !== confirmPin) { this.loginError = 'PINs don\'t match'; return; }
-                    if (!sb) { this.loginError = 'No connection to server'; return; }
+                    if (pin !== confirmP) { this.loginError = 'PINs do not match'; return; }
+                    if (!sb || !this.club) { this.loginError = 'No connection to server'; return; }
 
                     this.loginLoading = true;
                     try {
-                        // Check if name already taken
-                        const { data: existing } = await sb.from('saturday_bets_users')
-                            .select('id').eq('user_name', name).single();
-                        if (existing) {
-                            this.loginError = 'Name already taken. Try logging in!';
+                        const pinHash = await hashPin(pin);
+                        const { count } = await sb.from('saturday_bets_users')
+                            .select('*', { count: 'exact', head: true })
+                            .eq('club_id', this.club.id);
+                        const role = (count === 0) ? 'admin' : 'member';
+                        const { error } = await sb.from('saturday_bets_users').insert({
+                            user_name: name.toLowerCase(),
+                            pin_hash: pinHash,
+                            club_id: this.club.id,
+                            role: role
+                        });
+                        if (error) {
+                            if (error.code === '23505') this.loginError = 'That name is taken at this club.';
+                            else this.loginError = 'Registration failed: ' + error.message;
                             this.loginLoading = false;
                             return;
                         }
-                        // Create user
-                        const pinHash = await hashPin(pin);
-                        const { error } = await sb.from('saturday_bets_users')
-                            .insert({ user_name: name, pin_hash: pinHash });
-                        if (error) throw error;
-
-                        // Auto-login after registration
-                        this.loggedInUser = name;
+                        this.loggedInUser = name.toLowerCase();
                         this.userPin = pin;
-                        this.isAdmin = false;
-                        localStorage.setItem('sbUser', name);
+                        this.isAdmin = (role === 'admin');
+                        this.userRole = role;
+                        localStorage.setItem('sbUser', this.loggedInUser);
                         localStorage.setItem('sbPin', pin);
+                        localStorage.setItem('sbClub', this.clubSlug);
                         this.showLogin = false;
                         this.loginError = '';
-                        // Set first player name to logged-in user (if round not started)
                         if (!this.roundStarted && this.players.length > 0) {
-                            this.players[0].name = name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                            const displayName = name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                            this.players[0].name = displayName;
                             this.saveState();
                         }
-                    } catch(e) {
-                        this.loginError = 'Registration failed. Try again.';
-                    }
+                        if (role === 'admin') {
+                            alert('Welcome! You are the first member and have been made the club admin.');
+                        }
+                    } catch(e) { this.loginError = 'Registration failed. Try again.'; }
                     this.loginLoading = false;
                 },
 
                 async verifyLogin(name, pin) {
-                    if (!sb) { this.loggedInUser = name; this.userPin = pin; return; } // offline fallback
+                    const savedClub = localStorage.getItem('sbClub');
+                    if (savedClub && savedClub !== this.clubSlug) {
+                        localStorage.removeItem('sbUser');
+                        localStorage.removeItem('sbPin');
+                        localStorage.removeItem('sbClub');
+                        this.showLogin = true;
+                        return;
+                    }
+                    if (!sb) { this.loggedInUser = name; this.userPin = pin; return; }
                     try {
-                        const pinHash = await hashPin(pin);
-                        const { data: user } = await sb.from('saturday_bets_users')
-                            .select('*').eq('user_name', name).single();
-                        if (user && user.pin_hash === pinHash) {
-                            this.loggedInUser = name;
-                            this.userPin = pin;
-                            this.isAdmin = user.is_admin || false;
-                            // Set first player name to logged-in user (if round not started)
-                            if (!this.roundStarted && this.players.length > 0) {
-                                this.players[0].name = name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-                                this.saveState();
+                        if (this.clubSlug === 'flog') {
+                            const { data: players } = await sb.from('players')
+                                .select('id, name, pin').eq('active', true);
+                            const player = (players || []).find(p => p.name.toLowerCase() === name.toLowerCase());
+                            if (player && player.pin && player.pin === pin) {
+                                let userRole = 'member';
+                                try {
+                                    const { data: sbu } = await sb.from('saturday_bets_users')
+                                        .select('role, is_admin').eq('user_name', name.toLowerCase())
+                                        .eq('club_id', this.club?.id).single();
+                                    if (sbu) userRole = sbu.role || (sbu.is_admin ? 'admin' : 'member');
+                                } catch(e) {}
+                                this.loggedInUser = player.name.toLowerCase();
+                                this.userPin = pin;
+                                this.isAdmin = (userRole === 'admin' || userRole === 'super_admin');
+                                this.userRole = userRole;
+                                if (!this.roundStarted && this.players.length > 0) {
+                                    this.players[0].name = player.name;
+                                    this.saveState();
+                                }
+                            } else {
+                                localStorage.removeItem('sbUser');
+                                localStorage.removeItem('sbPin');
+                                this.showLogin = true;
                             }
                         } else {
-                            // Saved credentials invalid, show login
-                            localStorage.removeItem('sbUser');
-                            localStorage.removeItem('sbPin');
-                            this.showLogin = true;
+                            const pinHash = await hashPin(pin);
+                            const { data: user } = await sb.from('saturday_bets_users')
+                                .select('*').eq('user_name', name.toLowerCase())
+                                .eq('club_id', this.club?.id).single();
+                            if (user && user.pin_hash === pinHash) {
+                                this.loggedInUser = user.user_name;
+                                this.userPin = pin;
+                                this.isAdmin = (user.role === 'admin' || user.role === 'super_admin');
+                                this.userRole = user.role || 'member';
+                                if (!this.roundStarted && this.players.length > 0) {
+                                    const displayName = name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                                    this.players[0].name = displayName;
+                                    this.saveState();
+                                }
+                            } else {
+                                localStorage.removeItem('sbUser');
+                                localStorage.removeItem('sbPin');
+                                this.showLogin = true;
+                            }
                         }
                     } catch(e) {
-                        // Offline fallback - trust localStorage
                         this.loggedInUser = name;
                         this.userPin = pin;
                         if (!this.roundStarted && this.players.length > 0) {
@@ -2765,8 +2898,8 @@
                 },
 
                 doLogout() {
-                    localStorage.removeItem('sbUser'); localStorage.removeItem('sbPin');
-                    this.loggedInUser = null; this.userPin = null; this.isAdmin = false; this.showLogin = true;
+                    localStorage.removeItem('sbUser'); localStorage.removeItem('sbPin'); localStorage.removeItem('sbClub');
+                    this.loggedInUser = null; this.userPin = null; this.isAdmin = false; this.userRole = 'member'; this.showLogin = true;
                 },
 
                 /* ── Admin Functions ── */
@@ -2774,7 +2907,8 @@
                     if (!sb) return;
                     try {
                         const { data } = await sb.from('saturday_bets_users')
-                            .select('id, user_name, created_at, is_admin')
+                            .select('id, user_name, created_at, is_admin, role')
+                            .eq('club_id', this.club?.id)
                             .order('user_name');
                         this.adminUsers = data || [];
                     } catch(e) {
@@ -2805,6 +2939,7 @@
                         const today = new Date().toISOString().split('T')[0];
                         const { data, error } = await sb.from('saturday_bets_rounds')
                             .select('id, user_name, date, course, tees, status, player_names, total_winnings, updated_at')
+                            .eq('club_id', this.club?.id)
                             .or('status.eq.in_progress,and(status.eq.completed,date.gte.' + today + ')')
                             .order('updated_at', { ascending: false });
                         if (!error && data) this.liveGames = data;
@@ -2900,6 +3035,7 @@
                             status: status || 'in_progress',
                             player_names: pNames,
                             total_winnings: this.currentPosition,
+                            club_id: this.club?.id,
                             state: this.getStateSnapshot()
                         };
                         if (this.cloudRoundId) {
@@ -2921,6 +3057,7 @@
                         const { data, error } = await sb.from('saturday_bets_rounds')
                             .select('id, date, course, tees, status, player_names, total_winnings, created_at')
                             .eq('user_name', this.loggedInUser)
+                            .eq('club_id', this.club?.id)
                             .order('date', { ascending: false })
                             .limit(50);
                         if (!error && data) this.roundHistory = data;
