@@ -3633,9 +3633,13 @@
                     if (!sb) return;
                     if (!this.isAdmin) { alert('Only admins can delete rounds.'); return; }
                     if (!confirm('Remove this round from the leaderboard?')) return;
-                    await sb.from('saturday_bets_rounds').delete().eq('id', roundId);
-                    this.leaderboardData = this.leaderboardData.filter(p => p.roundId !== roundId);
-                    if (this.selectedLeaderboardPlayer && this.selectedLeaderboardPlayer.roundId === roundId) this.selectedLeaderboardPlayer = null;
+                    try {
+                        // Soft-delete: set status to 'removed' so it no longer appears in leaderboard queries
+                        const { error } = await sb.from('saturday_bets_rounds').update({ status: 'removed', updated_at: new Date().toISOString() }).eq('id', roundId);
+                        if (error) { alert('Error removing round: ' + error.message); return; }
+                        this.leaderboardData = this.leaderboardData.filter(p => p.roundId !== roundId);
+                        if (this.selectedLeaderboardPlayer && this.selectedLeaderboardPlayer.roundId === roundId) this.selectedLeaderboardPlayer = null;
+                    } catch(e) { alert('Remove failed: ' + e.message); }
                 },
                 exitHistoryView() {
                     this.viewingHistory = false;
