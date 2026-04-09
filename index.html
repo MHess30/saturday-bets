@@ -2690,6 +2690,27 @@
                     this.saveState();
                 },
 
+                // Look up a player's handicap from the club roster by name (case-insensitive)
+                // Returns handicap number or null if not found. Used to auto-fill handicap after login.
+                lookupRosterHandicap(name) {
+                    if (!name || !this.clubRoster || this.clubRoster.length === 0) return null;
+                    const target = name.trim().toLowerCase();
+                    const match = this.clubRoster.find(r => (r.player_name || '').trim().toLowerCase() === target);
+                    return match ? (match.handicap || 0) : null;
+                },
+                // Auto-fill player 0's name and handicap after login. Waits for roster if needed.
+                async autofillPlayer0(displayName) {
+                    if (this.roundStarted || !this.players || this.players.length === 0) return;
+                    this.players[0].name = displayName;
+                    // Ensure roster is loaded (it may still be pending)
+                    if (!this.clubRoster || this.clubRoster.length === 0) {
+                        try { await this.loadRoster(); } catch(e) {}
+                    }
+                    const hcp = this.lookupRosterHandicap(displayName);
+                    if (hcp !== null) this.players[0].handicap = hcp;
+                    this.saveState();
+                },
+
                 init() {
                     // Load club config first (sets branding, title)
                     this.loadClub().then(() => {
@@ -3438,8 +3459,7 @@
                         this.loginError = '';
                         if (!this.roundStarted && this.players.length > 0) {
                             const displayName = this.loggedInUser.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-                            this.players[0].name = displayName;
-                            this.saveState();
+                            this.autofillPlayer0(displayName);
                         }
                         const adminMode = sessionStorage.getItem('flog_admin_mode');
                         if (adminMode === 'true' && this.isAdmin) {
@@ -3498,8 +3518,7 @@
                         this.loginError = '';
                         if (!this.roundStarted && this.players.length > 0) {
                             const displayName = name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-                            this.players[0].name = displayName;
-                            this.saveState();
+                            this.autofillPlayer0(displayName);
                         }
                         if (role === 'admin') {
                             alert('Welcome! You are the first member and have been made the club admin.');
@@ -3539,8 +3558,7 @@
                                 this.isAdmin = (userRole === 'admin' || userRole === 'super_admin');
                                 this.userRole = userRole;
                                 if (!this.roundStarted && this.players.length > 0) {
-                                    this.players[0].name = player.name;
-                                    this.saveState();
+                                    this.autofillPlayer0(player.name);
                                 }
                             } else {
                                 localStorage.removeItem('sbUser');
@@ -3561,8 +3579,7 @@
                                 this.userRole = user.role || 'member';
                                 if (!this.roundStarted && this.players.length > 0) {
                                     const displayName = name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-                                    this.players[0].name = displayName;
-                                    this.saveState();
+                                    this.autofillPlayer0(displayName);
                                 }
                             } else {
                                 localStorage.removeItem('sbUser');
@@ -3574,8 +3591,7 @@
                         this.loggedInUser = name;
                         this.userPin = pin;
                         if (!this.roundStarted && this.players.length > 0) {
-                            this.players[0].name = name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-                            this.saveState();
+                            this.autofillPlayer0(name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '));
                         }
                     }
                 },
